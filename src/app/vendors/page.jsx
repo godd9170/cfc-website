@@ -71,6 +71,19 @@ export default function VendorsPage() {
         intro email and we'll guide the next step.
       </p>
 
+      <div className="mb-8 rounded-2xl border border-[#c8e0c0] bg-[#f2f8ef] px-6 py-5">
+        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#4a7a60]">
+          All sizes welcome
+        </p>
+        <p className="text-sm text-[#3d5c3a]">
+          Whether you're a backyard grower or an established farm, there's a
+          place for you here. There are no minimum quantities — you set your own
+          prices and decide exactly what you list and how much. If a week
+          doesn't work for you, simply don't list anything. You're always in
+          control.
+        </p>
+      </div>
+
       <div className="mb-8 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
           <p className="mb-3 text-xs uppercase tracking-[0.16em] text-[#8a7b69]">
@@ -122,7 +135,7 @@ export default function VendorsPage() {
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#2F5D50]" />
-              CFC adds a 20% consignment fee to each sale.
+              CFC adds a consignment fee to each sale.
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#2F5D50]" />
@@ -159,12 +172,21 @@ export default function VendorsPage() {
         <WeeklySchedule days={vendorDays} />
       </div>
 
-      <a
-        href="mailto:eat@countyfarmcollective.com?subject=Vendor%20Inquiry%20-%20County%20Farm%20Collective"
-        className="mb-8 inline-flex rounded-full bg-brand-primary px-5 py-2.5 text-sm font-semibold text-[#f7f4ed] hover:bg-brand-primary-dark"
-      >
-        Email to get started
-      </a>
+      <div className="mb-8 flex flex-col items-center gap-4 rounded-2xl bg-brand-primary px-8 py-10 text-center text-[#f7f4ed] sm:flex-row sm:text-left">
+        <div className="flex-1">
+          <h3 className="mb-1 text-xl font-bold">Ready to sell with us?</h3>
+          <p className="text-sm text-[#f7f4ed]/80">
+            Send us a quick intro — tell us a bit about yourself and what you
+            grow or make. We'll take it from there.
+          </p>
+        </div>
+        <a
+          href="mailto:eat@countyfarmcollective.com?subject=Vendor%20Inquiry%20-%20County%20Farm%20Collective"
+          className="shrink-0 rounded-full bg-[#f7f4ed] px-6 py-3 text-sm font-semibold text-brand-primary transition hover:bg-white"
+        >
+          Email to get started →
+        </a>
+      </div>
 
       <div>
         <h3 className="mb-4 text-2xl font-bold text-[#3F3228]">Our Vendors</h3>
