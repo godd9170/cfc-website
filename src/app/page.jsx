@@ -87,7 +87,7 @@ export default function LandingPage() {
             rel="noreferrer"
             className="flex-shrink-0 rounded-full bg-brand-amber px-4 py-2 text-xs font-semibold text-[#3F3228] hover:opacity-90"
           >
-            Shop now
+            Get Started
           </a>
         </div>
       </section>

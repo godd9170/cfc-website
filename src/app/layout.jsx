@@ -60,6 +60,9 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         <main>{children}</main>
+        <footer className="mt-12 border-t border-[#e2d8ca] py-6 text-center text-xs text-[#8a7b69]">
+          © {new Date().getFullYear()} County Farm Collective. All rights reserved.
+        </footer>
       </body>
     </html>
   )

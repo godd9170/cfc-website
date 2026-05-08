@@ -88,6 +88,19 @@ export default function CustomersPage() {
         predictable weekly routine.
       </p>
 
+      <div className="mb-8 rounded-2xl border border-[#c8e0c0] bg-[#f2f8ef] px-6 py-5">
+        <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#4a7a60]">
+          Shop on your terms
+        </p>
+        <p className="text-sm text-[#3d5c3a]">
+          No subscription, no membership fee, no commitment. Shop as much or as
+          little as you like — every week is a fresh start. Pickup orders have
+          no minimum. Delivery orders have a small order minimum to cover
+          logistics, but there&apos;s nothing else standing between you and
+          great local food.
+        </p>
+      </div>
+
       <div className="mb-8 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
           <h3 className="mb-2 text-lg font-semibold">How ordering works</h3>
@@ -112,7 +125,15 @@ export default function CustomersPage() {
         <WeeklySchedule days={customerDays} />
       </div>
 
-      <div className="mb-8 flex flex-wrap gap-2">
+      <div id="newsletter" className="mt-8">
+        <EmailCTA
+          heading="Weekly newsletter"
+          subheading="A short weekly reminder before the order window closes — so you never miss your chance to stock up on the freshest local food from the County."
+          compact
+        />
+      </div>
+
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
         <a
           href="https://cfc.localline.ca"
           target="_blank"
@@ -127,14 +148,6 @@ export default function CustomersPage() {
         >
           Browse vendors
         </Link>
-      </div>
-
-      <div id="newsletter" className="mt-8">
-        <EmailCTA
-          heading="Weekly newsletter"
-          subheading="Get a concise update each week on fresh products, featured vendors, and key notes before ordering closes."
-          compact
-        />
       </div>
     </section>
   );

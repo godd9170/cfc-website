@@ -42,13 +42,18 @@ export default function AboutPage() {
           Our story
         </p>
         <h2 className="mb-4 max-w-3xl font-amatic text-6xl font-bold leading-tight text-[#3F3228] md:text-7xl">
-          Local food shouldn&apos;t cost more.
+          Local food loses on price and convenience. We&apos;re fixing both.
         </h2>
         <p className="max-w-2xl text-base leading-7 text-[#5f5244] md:text-lg">
-          County Farm Collective started with a simple conviction: the people
-          who grow your food shouldn&apos;t be at a disadvantage, and neither
-          should the people trying to buy it. We&apos;re building the
-          infrastructure to change that in Prince Edward County.
+          Global supply chains beat local farms on cost through scale. Grocery
+          stores beat them on convenience through aggregation. Neither advantage
+          is permanent — supply chains are getting frailer, and the convenience
+          gap exists mostly because no one&apos;s bothered to close it. County
+          Farm Collective closes it: one place to see what County farms are
+          growing, one weekly order, one pickup. As more growers and households
+          join, the price gap closes too — not because anyone&apos;s being
+          charitable, but because the system finally has the coordination it
+          needed.
         </p>
       </div>
 
@@ -178,7 +183,15 @@ export default function AboutPage() {
         </ul>
       </div>
 
-      <div className="mb-8 flex flex-wrap gap-3">
+      <div id="newsletter">
+        <EmailCTA
+          heading="Stay in the loop"
+          subheading="A short weekly reminder before the order window closes — so you never miss your chance to stock up on the freshest local food from the County."
+          compact
+        />
+      </div>
+
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
         <a
           href="https://cfc.localline.ca"
           target="_blank"
@@ -193,14 +206,6 @@ export default function AboutPage() {
         >
           Meet our vendors
         </Link>
-      </div>
-
-      <div id="newsletter">
-        <EmailCTA
-          heading="Stay in the loop"
-          subheading="Get a short note before each order window opens — what's fresh, who's featured, and when to shop."
-          compact
-        />
       </div>
     </section>
   );
