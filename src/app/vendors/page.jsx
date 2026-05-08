@@ -85,6 +85,86 @@ export default function VendorsPage() {
         </p>
       </div>
 
+      <div className="mb-8">
+        <h3 className="mb-1 text-2xl font-bold tracking-tight text-[#3F3228]">
+          Why sell with CFC?
+        </h3>
+        <p className="mb-6 text-sm text-[#6d5f50]">
+          More than a marketplace — a partner built around how small farms actually work.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Sales
+            </p>
+            <h4 className="mb-2 text-base font-semibold text-[#3F3228]">
+              A new channel that runs itself
+            </h4>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              Your products reach households and restaurants across Prince Edward
+              County that would never make it to your farm stand — no extra
+              marketing, no extra effort on your end.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Logistics
+            </p>
+            <h4 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Outsource the last mile
+            </h4>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              Drop off your harvest once a week and we handle the rest. No
+              delivery runs, no packing logistics, no customer coordination. Stay
+              focused on what you do best — growing great food.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Sustainability
+            </p>
+            <h4 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Harvest only what's sold
+            </h4>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              Orders close before you harvest. You receive a consolidated pick
+              list in advance so you know exactly what to pull — nothing more,
+              nothing less. Less waste, better quality, lower stress.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Reach
+            </p>
+            <h4 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Customers beyond your doorstep
+            </h4>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              Your regulars already know you. CFC puts your products in front of
+              a growing base of weekly shoppers actively looking for local food —
+              people who want what you grow but might not know you exist yet.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)] sm:col-span-2 lg:col-span-1">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Insights
+            </p>
+            <h4 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Data that helps you grow smarter
+            </h4>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              See what's selling, understand seasonal demand, and get pricing
+              guidance based on real buyer behaviour across the platform. Sell
+              smarter, not just more.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="mb-8 grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
           <p className="mb-3 text-xs uppercase tracking-[0.16em] text-[#8a7b69]">
@@ -217,7 +297,7 @@ export default function VendorsPage() {
       <div className="mb-8 mt-8">
         <h3 className="mb-4 text-2xl font-bold text-[#3F3228]">Where our vendors are</h3>
         <p className="mb-4 text-sm text-[#6d5f50]">
-          Hover a marker to identify a farm, click to visit their profile.
+          We're bringing vendors all across Prince Edward County together in one place. Hover a marker to identify a farm, click to visit their profile.
         </p>
         <VendorMap />
         <p className="mt-2 text-xs text-[#b0a090]">

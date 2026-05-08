@@ -21,6 +21,7 @@ const NAV_LINKS = [
   { href: "/customers", label: "Customers" },
   { href: "/vendors",   label: "Vendors" },
   { href: "/about",     label: "About" },
+  { href: "/contact",   label: "Contact" },
 ];
 
 export default function Header() {
