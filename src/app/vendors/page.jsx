@@ -1,6 +1,7 @@
 import Link from "next/link";
 import VendorLogo from "../../components/VendorLogo";
 import WeeklySchedule from "../../components/WeeklySchedule";
+import VendorMap from "../../components/VendorMapClient";
 import { vendorMap } from "../../data/vendors";
 
 export const metadata = {
@@ -172,6 +173,8 @@ export default function VendorsPage() {
         <WeeklySchedule days={vendorDays} />
       </div>
 
+
+
       <div className="mb-8 flex flex-col items-center gap-4 rounded-2xl bg-brand-primary px-8 py-10 text-center text-[#f7f4ed] sm:flex-row sm:text-left">
         <div className="flex-1">
           <h3 className="mb-1 text-xl font-bold">Ready to sell with us?</h3>
@@ -210,6 +213,16 @@ export default function VendorsPage() {
             </Link>
           ))}
         </div>
+      </div>
+      <div className="mb-8 mt-8">
+        <h3 className="mb-4 text-2xl font-bold text-[#3F3228]">Where our vendors are</h3>
+        <p className="mb-4 text-sm text-[#6d5f50]">
+          Hover a marker to identify a farm, click to visit their profile.
+        </p>
+        <VendorMap />
+        <p className="mt-2 text-xs text-[#b0a090]">
+          Locations are approximate — not GPS-verified.
+        </p>
       </div>
     </section>
   );
