@@ -1,4 +1,5 @@
 import { Amatic_SC, Merriweather, Inter } from 'next/font/google'
+import Script from 'next/script'
 import Header from '../components/Header'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from '../lib/site'
 import '../index.css'
@@ -58,6 +59,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${merriweather.variable} ${amaticSC.variable}`}>
       <body>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Q9051DFT5Q"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-Q9051DFT5Q');
+        `}</Script>
         <Header />
         <main>{children}</main>
         <footer className="mt-12 border-t border-[#e2d8ca] py-6 text-center text-xs text-[#8a7b69]">
