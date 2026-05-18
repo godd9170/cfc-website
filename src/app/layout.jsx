@@ -72,7 +72,16 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <footer className="mt-12 border-t border-[#e2d8ca] py-6 text-center text-xs text-[#8a7b69]">
-          © {new Date().getFullYear()} County Farm Collective. All rights reserved.
+          <p>© {new Date().getFullYear()} County Farm Collective. All rights reserved.</p>
+          <a
+            href="https://www.instagram.com/county.farm.collective"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 text-[#8a7b69] hover:text-brand-primary transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            @county.farm.collective
+          </a>
         </footer>
       </body>
     </html>
