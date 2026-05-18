@@ -9,18 +9,6 @@ export const metadata = {
   alternates: { canonical: `${SITE_URL}/about` },
 };
 
-function Avatar({ initials, color }) {
-  return (
-    <div
-      className="flex h-24 w-24 items-center justify-center rounded-full text-2xl font-bold text-white shadow-md"
-      style={{ backgroundColor: color }}
-      aria-hidden="true"
-    >
-      {initials}
-    </div>
-  );
-}
-
 export default function AboutPage() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-12">
@@ -130,7 +118,7 @@ export default function AboutPage() {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <div className="mb-4 flex items-center gap-4">
-              <Avatar initials="H" color="#a4b787" />
+              <img src="/henry-profile.jpeg" alt="Hank Goddard" className="h-24 w-24 rounded-full object-cover shadow-md" />
               <h4 className="text-xl font-semibold text-[#3F3228]">Hank Goddard</h4>
             </div>
             <p className="text-sm leading-6 text-[#5f5244]">
@@ -145,7 +133,7 @@ export default function AboutPage() {
 
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <div className="mb-4 flex items-center gap-4">
-              <Avatar initials="M" color="#90b4d0" />
+              <img src="/mike-profile.jpeg" alt="Mike Da Silva" className="h-24 w-24 rounded-full object-cover shadow-md" />
               <h4 className="text-xl font-semibold text-[#3F3228]">Mike Da Silva</h4>
             </div>
             <p className="text-sm leading-6 text-[#5f5244]">
