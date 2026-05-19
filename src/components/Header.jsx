@@ -20,6 +20,7 @@ function NavLink({ href, children, onClick }) {
 const NAV_LINKS = [
   { href: "/customers", label: "Customers" },
   { href: "/vendors",   label: "Vendors" },
+  { href: "/faq",       label: "FAQ" },
   { href: "/about",     label: "About" },
   { href: "/contact",   label: "Contact" },
 ];
