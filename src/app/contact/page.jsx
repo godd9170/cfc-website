@@ -60,9 +60,18 @@ export default function ContactPage() {
       </p>
       <a
         href={`mailto:${EMAIL}`}
-        className="mb-10 inline-block text-lg font-semibold text-brand-primary hover:underline"
+        className="mb-6 inline-block text-lg font-semibold text-brand-primary hover:underline"
       >
         {EMAIL}
+      </a>
+
+      <p className="mb-1 text-sm text-[#6d5f50]">Prefer the phone? Call or text us.</p>
+      <a
+        href="tel:+13436553276"
+        className="mb-10 inline-block text-lg font-semibold text-brand-primary hover:underline"
+      >
+        1-343-655-<span className="underline decoration-2 underline-offset-4">FARM</span>{" "}
+        <span className="font-normal text-[#8a7b69]">(3276)</span>
       </a>
 
       <div className="grid gap-4 sm:grid-cols-2">
