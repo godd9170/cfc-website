@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import RadioBanner from "./RadioBanner";
 
 function NavLink({ href, children, onClick }) {
   const pathname = usePathname();
@@ -30,6 +31,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-20 border-b border-[#e2d8ca] bg-[#fdfaf4]/95 backdrop-blur">
+      <RadioBanner />
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <img src="/cabbage.png" alt="" className="h-10 w-auto" />
