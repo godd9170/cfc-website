@@ -64,6 +64,15 @@ export default function FaqPage() {
             rhythm.
           </FaqItem>
 
+          <FaqItem question="Why does my order say Awaiting approval?">
+            Some orders contain items that need a quick confirmation from the
+            vendor before they can be finalized. This happens when a product may
+            no longer be available, or when it&apos;s sold by weight and needs to
+            be weighed first so the vendor can charge you the exact amount. Once
+            the vendor confirms, your order status will update and you&apos;ll be
+            good to go.
+          </FaqItem>
+
           <FaqItem question="Is there a subscription or membership fee?">
             No subscription, no membership fee, no commitment. Shop as much or
             as little as you like — every week is a fresh start. Pickup orders
