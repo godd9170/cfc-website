@@ -138,22 +138,17 @@ export default function LandingPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              Facilities
+              New Pickup Location
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              Looking for a packing facility &amp; pickup points
+              Now picking up in Picton at Penny&apos;s Pantry!
             </h3>
             <p className="mb-4 text-sm leading-6 text-[#5f5244]">
-              We&apos;re on the hunt for a packing facility and additional
-              pickup points across the County — ideally in Picton. If you have
-              a space you think could work, we&apos;d love to hear from you.
+              We&apos;ve added a new pickup location in Picton! Head to{" "}
+              <span className="font-medium text-[#3F3228]">Penny&apos;s Pantry</span> at 10 Elizabeth St,
+              Prince Edward, ON K0K&nbsp;2T0. Pickup orders are available{" "}
+              <span className="font-medium text-[#3F3228]">Thursdays from 12pm – 5pm</span>.
             </p>
-            <a
-              href="mailto:eat@countyfarmcollective.com?subject=Facility%20%2F%20Pickup%20Point%20Inquiry%20—%20County%20Farm%20Collective"
-              className="text-sm font-medium text-[#2F5D50] hover:underline"
-            >
-              Get in touch →
-            </a>
           </div>
 
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
