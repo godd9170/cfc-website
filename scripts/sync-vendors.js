@@ -6,7 +6,7 @@
 
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve, dirname } from 'path'
-import { fileURLToPath } from 'url'
+import { fileURLToPath, pathToFileURL } from 'url'
 
 const __dir = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dir, '..')
@@ -56,6 +56,13 @@ function slugify(s) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
 
+// Preserve hand-curated descriptions for vendors already in the mapping (keyed by id)
+let existingDesc = new Map()
+try {
+  const mod = await import(pathToFileURL(resolve(root, 'src/data/vendors.js')).href)
+  existingDesc = new Map(mod.vendorMap.map(v => [v.id, v.description]))
+} catch {}
+
 const token = await auth()
 const raw = await fetchAll(token, '/vendors')
 
@@ -66,14 +73,16 @@ const vendors = raw
     slug: v.slug || slugify(v.name), // prefer LocalLine's own slug
     logo: v.image_full || null,
     location: v.location || null,
-    description: v.description || null,
+    // Keep existing description if this vendor was already in the mapping
+    description: existingDesc.has(v.id) ? existingDesc.get(v.id) : (v.description || null),
   }))
   .sort((a, b) => a.name.localeCompare(b.name))
 
 console.log(`Fetched ${vendors.length} vendors:`)
-vendors.forEach(v =>
-  console.log(`  [${v.id}] ${v.name}  logo: ${v.logo ? '✓' : '✗'}  desc: ${v.description ? '✓' : '✗'}  location: ${v.location ?? '(none)'}`)
-)
+vendors.forEach(v => {
+  const descSrc = existingDesc.has(v.id) ? 'kept' : 'new '
+  console.log(`  [${v.id}] ${v.name}  logo: ${v.logo ? '✓' : '✗'}  desc: ${v.description ? '✓' : '✗'} (${descSrc})  location: ${v.location ?? '(none)'}`)
+})
 
 // Use JSON.stringify for description to safely handle HTML, quotes, newlines
 function serializeVendor(v) {
@@ -88,7 +97,7 @@ const mapBlock =
 
 const rest = readFileSync(resolve(root, 'src/data/vendors.js'), 'utf8')
   // Strip everything up to and including the vendorMap block and vendorList line
-  .replace(/\/\/ Static vendor registry[\s\S]*?export const vendorList = vendorMap\.map\(v => v\.name\)\n/, '')
+  .replace(/\/\/ Static vendor registry[\s\S]*?export const vendorList = vendorMap\.map\(\(?v\)? => v\.name\);?\n/, '')
   .trimStart()
 
 const output =
