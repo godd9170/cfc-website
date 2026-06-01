@@ -83,3 +83,4 @@ src/
 public/          # Static images (produce illustrations, OG image)
 scripts/         # sync-vendors.js — LocalLine → vendors.js sync
 ```
+
