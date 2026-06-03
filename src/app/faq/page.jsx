@@ -73,6 +73,12 @@ export default function FaqPage() {
             good to go.
           </FaqItem>
 
+          <FaqItem question="Do I have to order every week?">
+            Not at all. There&apos;s no weekly commitment — order when it works
+            for you. Whether you&apos;re a one-time shopper, an occasional
+            customer, or a weekly regular, all are equally welcome.
+          </FaqItem>
+
           <FaqItem question="Is there a subscription or membership fee?">
             No subscription, no membership fee, no commitment. Shop as much or
             as little as you like — every week is a fresh start. Pickup orders
