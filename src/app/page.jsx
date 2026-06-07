@@ -138,17 +138,39 @@ export default function LandingPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              New Pickup Location
+              New Pickup Locations
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              Now picking up in Picton at Penny&apos;s Pantry!
+              2 new pickup locations in the County!
             </h3>
-            <p className="mb-4 text-sm leading-6 text-[#5f5244]">
-              We&apos;ve added a new pickup location in Picton! Head to{" "}
-              <span className="font-medium text-[#3F3228]">Penny&apos;s Pantry</span> at 10 Elizabeth St,
-              Prince Edward, ON K0K&nbsp;2T0. Pickup orders are available{" "}
-              <span className="font-medium text-[#3F3228]">Thursdays from 12pm – 5pm</span>.
+            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
+              We&apos;ve added two new pickup locations, both available{" "}
+              <span className="font-medium text-[#3F3228]">Thursdays from 12pm – 5pm</span>:
             </p>
+            <ul className="space-y-2 text-sm leading-6 text-[#5f5244]">
+              <li>
+                <span className="font-medium text-[#3F3228]">Penny&apos;s Pantry</span> —{" "}
+                <a
+                  href="https://maps.google.com/?q=10+Elizabeth+St,+Picton,+ON+K0K+2T0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2F5D50] hover:underline"
+                >
+                  10 Elizabeth St, Picton, ON K0K&nbsp;2T0
+                </a>
+              </li>
+              <li>
+                <span className="font-medium text-[#3F3228]">County Feasts</span> —{" "}
+                <a
+                  href="https://maps.google.com/?q=305+Main+St,+Wellington,+ON+K0K+3L0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2F5D50] hover:underline"
+                >
+                  305 Main St, Wellington, ON K0K&nbsp;3L0
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
