@@ -144,12 +144,13 @@ export default function LandingPage() {
               2 new pickup locations in the County!
             </h3>
             <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              We&apos;ve added two new pickup locations, both available{" "}
-              <span className="font-medium text-[#3F3228]">Thursdays from 12pm – 5pm</span>:
+              We&apos;ve added two new pickup locations, both available on{" "}
+              <span className="font-medium text-[#3F3228]">Thursdays until 5pm</span>:
             </p>
             <ul className="space-y-2 text-sm leading-6 text-[#5f5244]">
               <li>
-                <span className="font-medium text-[#3F3228]">Penny&apos;s Pantry</span> —{" "}
+                <span className="font-medium text-[#3F3228]">Penny&apos;s Pantry</span>{" "}
+                <span className="text-[#8a7b69]">(12pm – 5pm)</span> —{" "}
                 <a
                   href="https://maps.google.com/?q=10+Elizabeth+St,+Picton,+ON+K0K+2T0"
                   target="_blank"
@@ -160,7 +161,8 @@ export default function LandingPage() {
                 </a>
               </li>
               <li>
-                <span className="font-medium text-[#3F3228]">County Feasts</span> —{" "}
+                <span className="font-medium text-[#3F3228]">County Feasts</span>{" "}
+                <span className="text-[#8a7b69]">(12:30pm – 5pm)</span> —{" "}
                 <a
                   href="https://maps.google.com/?q=305+Main+St,+Wellington,+ON+K0K+3L0"
                   target="_blank"
