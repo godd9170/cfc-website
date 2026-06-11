@@ -73,6 +73,14 @@ export default function FaqPage() {
             good to go.
           </FaqItem>
 
+          <FaqItem question="Can I place more than one order in a week?">
+            Yes — you can place multiple orders during the same window. Vendors
+            sometimes add new products after the window opens, so feel free to
+            place a second (or third) order if you spot something you missed.
+            We&apos;ll combine everything into a single pickup or delivery for
+            you.
+          </FaqItem>
+
           <FaqItem question="Do I have to order every week?">
             Not at all. There&apos;s no weekly commitment — order when it works
             for you. Whether you&apos;re a one-time shopper, an occasional
