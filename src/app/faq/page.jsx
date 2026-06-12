@@ -110,11 +110,11 @@ export default function FaqPage() {
           </FaqItem>
 
           <FaqItem question="Where and when do I pick up my order?">
-            Pickup is in <strong>Picton</strong> every Thursday from 12:00 PM
-            to 5:00 PM. We&apos;re actively adding more pickup points across the
-            County — if you have a location in mind or want to be notified when
-            one opens near you,{" "}
-            <Link href="/contact">get in touch</Link>.
+            We have two pickup locations, both on Thursdays:
+            <ul className="mt-2 space-y-1 list-disc list-inside">
+              <li><strong>Penny&apos;s Pantry</strong> — 10 Elizabeth St, Picton &mdash; 12:00 PM to 5:00 PM</li>
+              <li><strong>County Feasts</strong> — 305 Main St, Wellington &mdash; 12:30 PM to 5:00 PM</li>
+            </ul>
           </FaqItem>
 
           <FaqItem question="How will frozen items be delivered or packaged?">
