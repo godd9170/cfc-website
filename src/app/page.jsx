@@ -45,9 +45,10 @@ export default function LandingPage() {
             PEC&apos;s harvest, in one place.
           </h2>
           <p className="max-w-3xl text-base leading-7 text-[#5f5244] md:text-lg">
-            We connect Prince Edward County growers and makers directly to
-            locals every week — with one easy storefront, one coordinated
-            fulfillment flow, and the freshest possible food.
+            We make it easier to eat real local food by bringing together
+            Prince Edward County growers and makers in one place. Shop exactly
+            what you want each week, with no subscriptions, pre-set boxes, or
+            ongoing commitments.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a
