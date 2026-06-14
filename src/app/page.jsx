@@ -142,10 +142,10 @@ export default function LandingPage() {
               New Pickup Locations
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              2 new pickup locations in the County!
+              3 pickup locations across the County!
             </h3>
             <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              We&apos;ve added two new pickup locations, both available on{" "}
+              We now have three pickup locations, all on{" "}
               <span className="font-medium text-[#3F3228]">Thursdays until 5pm</span>:
             </p>
             <ul className="space-y-2 text-sm leading-6 text-[#5f5244]">
@@ -158,7 +158,19 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="text-[#2F5D50] hover:underline"
                 >
-                  10 Elizabeth St, Picton, ON K0K&nbsp;2T0
+                  Picton
+                </a>
+              </li>
+              <li>
+                <span className="font-medium text-[#3F3228]">Bloomfield Wellness Club</span>{" "}
+                <span className="text-[#8a7b69]">(12pm – 5pm)</span> —{" "}
+                <a
+                  href="https://maps.google.com/?q=8+Stanley+St+%2315,+Bloomfield,+ON+K0K+1G0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2F5D50] hover:underline"
+                >
+                  Bloomfield
                 </a>
               </li>
               <li>
@@ -170,7 +182,7 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="text-[#2F5D50] hover:underline"
                 >
-                  305 Main St, Wellington, ON K0K&nbsp;3L0
+                  Wellington
                 </a>
               </li>
             </ul>

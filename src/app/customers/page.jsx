@@ -125,6 +125,54 @@ export default function CustomersPage() {
         <WeeklySchedule days={customerDays} />
       </div>
 
+      <div className="mb-8">
+        <h3 className="mb-3 text-lg font-semibold">Pickup locations</h3>
+        <p className="mb-4 text-sm text-[#6d5f50]">
+          All pickup locations are available every Thursday.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">Picton</p>
+            <h4 className="mb-1 text-sm font-semibold text-[#3F3228]">Penny&apos;s Pantry</h4>
+            <a
+              href="https://maps.google.com/?q=10+Elizabeth+St,+Picton,+ON+K0K+2T0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[#2F5D50] hover:underline"
+            >
+              10 Elizabeth St, Prince Edward, ON K0K&nbsp;2T0
+            </a>
+            <p className="mt-2 text-xs text-[#8a7b69]">Thu 12:00 PM – 5:00 PM</p>
+          </div>
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">Bloomfield</p>
+            <h4 className="mb-1 text-sm font-semibold text-[#3F3228]">Bloomfield Wellness Club</h4>
+            <a
+              href="https://maps.google.com/?q=8+Stanley+St+%2315,+Bloomfield,+ON+K0K+1G0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[#2F5D50] hover:underline"
+            >
+              8 Stanley St #15, Bloomfield, ON K0K&nbsp;1G0
+            </a>
+            <p className="mt-2 text-xs text-[#8a7b69]">Thu 12:00 PM – 5:00 PM</p>
+          </div>
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">Wellington</p>
+            <h4 className="mb-1 text-sm font-semibold text-[#3F3228]">County Feasts</h4>
+            <a
+              href="https://maps.google.com/?q=305+Main+St,+Wellington,+ON+K0K+3L0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[#2F5D50] hover:underline"
+            >
+              305 Main St, Wellington, ON K0K&nbsp;3L0
+            </a>
+            <p className="mt-2 text-xs text-[#8a7b69]">Thu 12:30 PM – 5:00 PM</p>
+          </div>
+        </div>
+      </div>
+
       <div id="newsletter" className="mt-8">
         <EmailCTA
           heading="Weekly newsletter"
