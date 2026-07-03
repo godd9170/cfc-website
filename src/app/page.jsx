@@ -45,7 +45,7 @@ export default function LandingPage() {
             PEC&apos;s harvest, in one place.
           </h2>
           <p className="max-w-3xl text-base leading-7 text-[#5f5244] md:text-lg">
-            We make it easier to eat real local food by bringing together
+            We make it easier to eat real, local food by bringing together
             Prince Edward County growers and makers in one place. Shop exactly
             what you want each week, with no subscriptions, pre-set boxes, or
             ongoing commitments.
@@ -163,7 +163,7 @@ export default function LandingPage() {
               </li>
               <li>
                 <span className="font-medium text-[#3F3228]">Bloomfield Wellness Club</span>{" "}
-                <span className="text-[#8a7b69]">(12pm – 5pm)</span> —{" "}
+                <span className="text-[#8a7b69]">(12:30pm – 5pm)</span> —{" "}
                 <a
                   href="https://maps.google.com/?q=8+Stanley+St+%2315,+Bloomfield,+ON+K0K+1G0"
                   target="_blank"

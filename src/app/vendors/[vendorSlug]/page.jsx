@@ -72,10 +72,12 @@ function ProductCard({ product, col, row }) {
 
 async function VendorProducts({ vendorId, storefrontUrl }) {
   let products = []
-  try {
-    products = await getVendorProducts(vendorId)
-  } catch (err) {
-    console.error(`Failed to load products for vendor ${vendorId}:`, err)
+  if (vendorId != null) {
+    try {
+      products = await getVendorProducts(vendorId)
+    } catch (err) {
+      console.error(`Failed to load products for vendor ${vendorId}:`, err)
+    }
   }
 
   if (products.length === 0) {

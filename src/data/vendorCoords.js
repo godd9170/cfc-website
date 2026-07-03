@@ -7,6 +7,7 @@ export const VENDOR_COORDS = {
   'nomad-mushroom':     [44.00390732270795, -77.14934073205336], // 212 County Road 16, Black River
   'paper-kite':         [43.96822395760929, -77.03765473903154], // Black River
   'portico-gardens':    [43.9874, -77.2208], // 1465 County Road 2, near Bloomfield
+  'ivyridge-honey-farm': [43.9874, -77.2208], // 1465 County Road 2 (operates from Portico Gardens)
   'return-to-earth':    [44.0092, -77.0534], // 1418 County Road 8
   'rorafresh':          [44.0489, -76.9655], // 1951 County Road 7, Cressy
   'scott-farms':        [43.9741, -77.4551], // Hillier (no address — village centre)
