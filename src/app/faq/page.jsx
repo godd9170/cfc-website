@@ -110,9 +110,10 @@ export default function FaqPage() {
           </FaqItem>
 
           <FaqItem question="Where and when do I pick up my order?">
-            We have two pickup locations, both on Thursdays:
+            We have three pickup locations, all on Thursdays:
             <ul className="mt-2 space-y-1 list-disc list-inside">
               <li><strong>Penny&apos;s Pantry</strong> — 10 Elizabeth St, Picton &mdash; 12:00 PM to 5:00 PM</li>
+              <li><strong>Bloomfield Wellness Club</strong> — 8 Stanley St #15, Bloomfield &mdash; 12:30 PM to 5:00 PM</li>
               <li><strong>County Feasts</strong> — 305 Main St, Wellington &mdash; 12:30 PM to 5:00 PM</li>
             </ul>
           </FaqItem>
