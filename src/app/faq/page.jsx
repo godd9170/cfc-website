@@ -90,8 +90,8 @@ export default function FaqPage() {
           <FaqItem question="Is there a subscription or membership fee?">
             No subscription, no membership fee, no commitment. Shop as much or
             as little as you like — every week is a fresh start. Pickup orders
-            have no order minimum. Delivery orders have a small minimum to cover
-            logistics.
+            have no order minimum. Delivery orders of $75 or more are free
+            (otherwise a modest fee of $3.75) to help cover logistics.
           </FaqItem>
         </div>
       </div>

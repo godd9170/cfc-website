@@ -95,9 +95,9 @@ export default function CustomersPage() {
         <p className="text-sm text-[#3d5c3a]">
           No subscription, no membership fee, no commitment. Shop as much or as
           little as you like — every week is a fresh start. Pickup orders have
-          no minimum. Delivery orders have a small order minimum to cover
-          logistics, but there&apos;s nothing else standing between you and
-          great local food.
+          no minimum. Delivery orders of $75 or more are free (otherwise a
+          modest fee of $3.75) to help cover logistics, but there&apos;s
+          nothing else standing between you and great local food.
         </p>
       </div>
 
