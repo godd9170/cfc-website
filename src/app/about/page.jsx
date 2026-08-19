@@ -9,6 +9,24 @@ export const metadata = {
   alternates: { canonical: `${SITE_URL}/about` },
 };
 
+// Keep this list current as new coverage comes in — most recent first.
+const PRESS_MENTIONS = [
+  {
+    outlet: "The Picton Gazette",
+    title: "County Farm Collective",
+    date: "August 2026",
+    type: "Article",
+    url: "https://www.pictongazette.ca/post/county-farm-collective",
+  },
+  {
+    outlet: "County 99.3 FM",
+    title: "As heard on County FM",
+    date: "May 2026",
+    type: "Radio",
+    url: "https://www.993countyfm.ca/podcast/?source=69473&mp3=podcast.993countyfm.ca:8000/Archive/CountyFM-Archive_2026-05-20_Wed_18.mp3",
+  },
+];
+
 export default function AboutPage() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-12">
@@ -169,6 +187,39 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* In the press */}
+      <div className="mb-10">
+        <h3 className="mb-1 text-2xl font-bold tracking-tight text-[#3F3228]">
+          In the press
+        </h3>
+        <p className="mb-6 text-sm text-[#6d5f50]">
+          Coverage and mentions from local media.
+        </p>
+        <div className="space-y-4">
+          {PRESS_MENTIONS.map((item) => (
+            <a
+              key={item.url}
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex flex-col gap-1 rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)] transition hover:-translate-y-0.5 hover:border-brand-primary sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+                  {item.outlet} · {item.date}
+                </p>
+                <p className="text-sm font-semibold text-[#3F3228]">
+                  {item.title}
+                </p>
+              </div>
+              <span className="mt-2 shrink-0 text-sm font-medium text-brand-primary sm:mt-0">
+                {item.type === "Radio" ? "Listen" : "Read"} →
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
 
       <div id="newsletter">

@@ -139,6 +139,27 @@ export default function LandingPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              In the Press
+            </p>
+            <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Featured in the Picton Gazette
+            </h3>
+            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
+              The Gazette covered how County Farm Collective connects fifteen
+              local Prince Edward County farms through one weekly online order.
+            </p>
+            <a
+              href="https://www.pictongazette.ca/post/county-farm-collective"
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-medium text-[#2F5D50] hover:underline"
+            >
+              Read the article →
+            </a>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
               Referral Program
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
