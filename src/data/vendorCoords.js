@@ -5,6 +5,7 @@ export const VENDOR_COORDS = {
   'fiddlehead':         [44.0811, -77.1840], // Fish Lake Road, Demorestville / Sophiasburgh
   'lambs-quarters':     [44.0084, -77.1639], // 240 County Road 4
   'nomad-mushroom':     [44.00390732270795, -77.14934073205336], // 212 County Road 16, Black River
+  'onceupona-farm':     [44.0327863, -77.0335972], // 722 County Rd 7, North Marysburg (geocoded)
   'paper-kite':         [43.96822395760929, -77.03765473903154], // Black River
   'portico-gardens':    [43.9874, -77.2208], // 1465 County Road 2, near Bloomfield
   'ivyridge-honey-farm': [43.9874, -77.2208], // 1465 County Road 2 (operates from Portico Gardens)
