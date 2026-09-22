@@ -139,6 +139,33 @@ export default function LandingPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+              Meet Us In Person
+            </p>
+            <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
+              Pop-up at the Picton Farmers Market
+            </h3>
+            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
+              Come say hello on{" "}
+              <span className="font-medium text-[#3F3228]">Sunday, October 18</span>{" "}
+              <span className="text-[#8a7b69]">(9am – 2pm)</span> at the{" "}
+              <a
+                href="https://maps.google.com/?q=Picton+Farmers+Market,+Picton,+ON"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2F5D50] hover:underline"
+              >
+                Picton Farmers Market
+              </a>
+              , where we&apos;ll be doing a County Farm Collective pop-up.
+            </p>
+            <p className="text-sm leading-6 text-[#5f5244]">
+              Stop by to meet the team, ask questions about how weekly ordering
+              works, and hear about the farms behind the collective.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
               In the Press
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
@@ -156,57 +183,6 @@ export default function LandingPage() {
             >
               Read the article →
             </a>
-          </div>
-
-          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              Referral Program
-            </p>
-            <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              Refer a friend. You both get free bread.
-            </h3>
-            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              Love shopping with CFC? Share it with a friend and you&apos;ll both
-              receive a free loaf of sourdough from{" "}
-              <span className="font-medium text-[#3F3228]">Sheep on 7</span>.
-            </p>
-            <ol className="mb-3 list-decimal space-y-1 pl-4 text-sm leading-6 text-[#5f5244]">
-              <li>Your friend places their first order of $35 or more.</li>
-              <li>They add a Sheep on 7 sourdough loaf to their cart.</li>
-              <li>
-                At checkout, they enter the coupon code{" "}
-                <span className="font-mono font-semibold text-[#3F3228]">FREEBREAD</span>.
-              </li>
-              <li>They include your name in the order notes (or email us).</li>
-            </ol>
-            <p className="text-xs leading-5 text-[#8a7b69]">
-              New customers only · One use per customer · Minimum $35 order · Bread must be in cart before applying code.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              Delivery Update
-            </p>
-            <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              A small update to home delivery
-            </h3>
-            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              Home delivery orders now include a{" "}
-              <span className="font-medium text-[#3F3228]">$3.75 delivery fee</span>.
-              This small fee helps us keep delivery reliable as we grow and expand
-              our service area.
-            </p>
-            <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              Spend{" "}
-              <span className="font-medium text-[#3F3228]">$75 or more</span> and
-              we&apos;ll waive the fee entirely.
-            </p>
-            <p className="text-sm leading-6 text-[#5f5244]">
-              As always,{" "}
-              <span className="font-medium text-[#3F3228]">pickup remains free</span>{" "}
-              at all three of our pickup locations.
-            </p>
           </div>
 
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
@@ -258,26 +234,6 @@ export default function LandingPage() {
                 </a>
               </li>
             </ul>
-          </div>
-
-          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              Drivers Wanted
-            </p>
-            <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              We&apos;re looking for more drivers!
-            </h3>
-            <p className="mb-4 text-sm leading-6 text-[#5f5244]">
-              A terrific way to spend a few hours a week driving through
-              beautiful Prince Edward County. If you&apos;re interested,
-              reach out and we&apos;ll send you all the details.
-            </p>
-            <a
-              href="mailto:eat@countyfarmcollective.com?subject=Driver%20Interest%20—%20County%20Farm%20Collective"
-              className="text-sm font-medium text-[#2F5D50] hover:underline"
-            >
-              Let us know →
-            </a>
           </div>
         </div>
       </section>
