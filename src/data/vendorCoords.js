@@ -18,4 +18,5 @@ export const VENDOR_COORDS = {
   'vickis-veggies':     [43.9789, -77.0219], // 81 Morrison Point Road, Milford area
   'brackens':           [43.92918, -77.1463074], // 1927 County Road 10, Picton (Cherryvalley)
   'hellyer-organics':  [44.052746149125696, -76.94783980970087], // County Road 7, North Marysburg
+  'sheep-on-7':        [44.052708, -76.948333], // Cressy
 }
