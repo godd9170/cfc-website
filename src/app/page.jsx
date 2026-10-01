@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EmailCTA from "../components/EmailCTA";
+import Testimonials from "../components/Testimonials";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "../lib/site";
 
 export const metadata = {
@@ -131,6 +132,8 @@ export default function LandingPage() {
           </Link>
         </article>
       </section>
+
+      <Testimonials />
 
       <section className="mx-auto w-full max-w-6xl px-6 pb-14">
         <h2 className="mb-5 text-2xl font-bold tracking-tight text-[#3F3228]">
