@@ -94,7 +94,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 pb-12">
+      <section id="newsletter" className="mx-auto w-full max-w-6xl scroll-mt-32 px-6 pb-12">
         <EmailCTA
           heading="Get the weekly harvest update"
           subheading="A short weekly reminder before the order window closes — so you never miss your chance to stock up on the freshest local food from the County."
