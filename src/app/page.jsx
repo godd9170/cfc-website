@@ -142,15 +142,20 @@ export default function LandingPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-              Meet Us In Person
+              Out in the Community
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
               Pop-up at the Picton Farmers Market
             </h3>
+            <img
+              src="/picton-farmers-market.jpeg"
+              alt="Mike and Hank at the County Farm Collective booth at the Picton Farmers Market"
+              className="mb-3 w-full rounded-xl object-cover"
+            />
             <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              Come say hello on{" "}
+              On{" "}
               <span className="font-medium text-[#3F3228]">Sunday, October 18</span>{" "}
-              <span className="text-[#8a7b69]">(9am – 2pm)</span> at the{" "}
+              we set up at the{" "}
               <a
                 href="https://maps.google.com/?q=Picton+Farmers+Market,+Picton,+ON"
                 target="_blank"
@@ -159,11 +164,11 @@ export default function LandingPage() {
               >
                 Picton Farmers Market
               </a>
-              , where we&apos;ll be doing a County Farm Collective pop-up.
+              {" "}for a County Farm Collective pop-up.
             </p>
             <p className="text-sm leading-6 text-[#5f5244]">
-              Stop by to meet the team, ask questions about how weekly ordering
-              works, and hear about the farms behind the collective.
+              Thanks to everyone who stopped by to meet the team, ask about
+              weekly ordering, and hear about the farms behind the collective.
             </p>
           </div>
 

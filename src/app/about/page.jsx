@@ -12,6 +12,15 @@ export const metadata = {
 // Keep this list current as new coverage comes in — most recent first.
 const PRESS_MENTIONS = [
   {
+    outlet: "Picton Farmers Market",
+    title: "County Farm Collective pop-up at the Picton Farmers Market",
+    date: "October 18, 2026",
+    type: "Event",
+    image: "/picton-farmers-market.jpeg",
+    imageAlt:
+      "Mike and Hank at the County Farm Collective booth at the Picton Farmers Market",
+  },
+  {
     outlet: "The Picton Gazette",
     title: "County Farm Collective",
     date: "August 2026",
@@ -198,27 +207,44 @@ export default function AboutPage() {
           Coverage and mentions from local media.
         </p>
         <div className="space-y-4">
-          {PRESS_MENTIONS.map((item) => (
-            <a
-              key={item.url}
-              href={item.url}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-col gap-1 rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)] transition hover:-translate-y-0.5 hover:border-brand-primary sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div>
-                <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
-                  {item.outlet} · {item.date}
-                </p>
-                <p className="text-sm font-semibold text-[#3F3228]">
-                  {item.title}
-                </p>
-              </div>
-              <span className="mt-2 shrink-0 text-sm font-medium text-brand-primary sm:mt-0">
-                {item.type === "Radio" ? "Listen" : "Read"} →
-              </span>
-            </a>
-          ))}
+          {PRESS_MENTIONS.map((item) => {
+            const Card = item.url ? "a" : "div";
+            const linkProps = item.url
+              ? { href: item.url, target: "_blank", rel: "noreferrer" }
+              : {};
+            return (
+              <Card
+                key={`${item.outlet}-${item.date}`}
+                {...linkProps}
+                className={`flex flex-col gap-4 rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)] sm:flex-row sm:items-center sm:justify-between ${
+                  item.url ? "transition hover:-translate-y-0.5 hover:border-brand-primary" : ""
+                }`}
+              >
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+                  {item.image && (
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      className="w-full rounded-xl object-cover sm:h-32 sm:w-44"
+                    />
+                  )}
+                  <div>
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">
+                      {item.outlet} · {item.date}
+                    </p>
+                    <p className="text-sm font-semibold text-[#3F3228]">
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+                {item.url && (
+                  <span className="shrink-0 text-sm font-medium text-brand-primary">
+                    {item.type === "Radio" ? "Listen" : "Read"} →
+                  </span>
+                )}
+              </Card>
+            );
+          })}
         </div>
       </div>
 
