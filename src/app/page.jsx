@@ -198,10 +198,10 @@ export default function LandingPage() {
               New Pickup Locations
             </p>
             <h3 className="mb-2 text-base font-semibold text-[#3F3228]">
-              3 pickup locations across the County!
+              Pickup locations across the County!
             </h3>
             <p className="mb-3 text-sm leading-6 text-[#5f5244]">
-              We now have three pickup locations, all on{" "}
+              Pickup is on{" "}
               <span className="font-medium text-[#3F3228]">Thursdays until 5pm</span>:
             </p>
             <ul className="space-y-2 text-sm leading-6 text-[#5f5244]">
@@ -219,7 +219,7 @@ export default function LandingPage() {
               </li>
               <li>
                 <span className="font-medium text-[#3F3228]">Bloomfield Wellness Club</span>{" "}
-                <span className="text-[#8a7b69]">(12:30pm – 5pm)</span> —{" "}
+                <span className="font-medium text-brand-primary">(currently not available)</span> —{" "}
                 <a
                   href="https://maps.google.com/?q=8+Stanley+St+%2315,+Bloomfield,+ON+K0K+1G0"
                   target="_blank"

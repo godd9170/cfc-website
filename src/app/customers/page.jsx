@@ -128,7 +128,7 @@ export default function CustomersPage() {
       <div className="mb-8">
         <h3 className="mb-3 text-lg font-semibold">Pickup locations</h3>
         <p className="mb-4 text-sm text-[#6d5f50]">
-          All pickup locations are available every Thursday.
+          Pickup is available every Thursday. Bloomfield is currently not available.
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
@@ -144,7 +144,7 @@ export default function CustomersPage() {
             </a>
             <p className="mt-2 text-xs text-[#8a7b69]">Thu 12:00 PM – 5:00 PM</p>
           </div>
-          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
+          <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 opacity-70 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">Bloomfield</p>
             <h4 className="mb-1 text-sm font-semibold text-[#3F3228]">Bloomfield Wellness Club</h4>
             <a
@@ -155,7 +155,7 @@ export default function CustomersPage() {
             >
               8 Stanley St #15, Bloomfield, ON K0K&nbsp;1G0
             </a>
-            <p className="mt-2 text-xs text-[#8a7b69]">Thu 12:00 PM – 5:00 PM</p>
+            <p className="mt-2 text-xs font-semibold text-brand-primary">Currently not available</p>
           </div>
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-5 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7b69]">Wellington</p>
