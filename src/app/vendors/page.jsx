@@ -2,7 +2,7 @@ import Link from "next/link";
 import VendorLogo from "../../components/VendorLogo";
 import WeeklySchedule from "../../components/WeeklySchedule";
 import VendorMap from "../../components/VendorMapClient";
-import { vendorMap } from "../../data/vendors";
+import { activeVendors } from "../../data/vendors";
 
 export const metadata = {
   title: "Our Vendors",
@@ -278,7 +278,7 @@ export default function VendorsPage() {
           platform.
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {vendorMap.map((vendor) => (
+          {activeVendors.map((vendor) => (
             <Link
               key={vendor.slug}
               href={`/vendors/${vendor.slug}`}

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { vendorMap } from '../data/vendors'
+import { activeVendors } from '../data/vendors'
 import { VENDOR_COORDS } from '../data/vendorCoords'
 
 // Centre of Prince Edward County
@@ -12,7 +12,7 @@ const ZOOM = 11
 
 export default function VendorMap() {
   const router = useRouter()
-  const mapped = vendorMap.filter(v => VENDOR_COORDS[v.slug])
+  const mapped = activeVendors.filter(v => VENDOR_COORDS[v.slug])
 
   return (
     <div

@@ -1,5 +1,5 @@
 import { SITE_URL } from '../lib/site'
-import { vendorMap } from '../data/vendors'
+import { activeVendors } from '../data/vendors'
 
 export default function sitemap() {
   const now = new Date()
@@ -14,7 +14,7 @@ export default function sitemap() {
     { url: `${SITE_URL}/code-of-conduct`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ]
 
-  const vendorPages = vendorMap.map(v => ({
+  const vendorPages = activeVendors.map(v => ({
     url: `${SITE_URL}/vendors/${v.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',

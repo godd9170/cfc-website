@@ -2,16 +2,16 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { getVendorProducts } from '../../../lib/localline'
-import { vendorMap } from '../../../data/vendors'
+import { activeVendors } from '../../../data/vendors'
 import { SITE_URL } from '../../../lib/site'
 
 export function generateStaticParams() {
-  return vendorMap.map(v => ({ vendorSlug: v.slug }))
+  return activeVendors.map(v => ({ vendorSlug: v.slug }))
 }
 
 export async function generateMetadata({ params }) {
   const { vendorSlug } = await params
-  const vendor = vendorMap.find(v => v.slug === vendorSlug)
+  const vendor = activeVendors.find(v => v.slug === vendorSlug)
   if (!vendor) return {}
 
   const description = vendor.description
@@ -131,7 +131,7 @@ function ProductsSkeleton() {
 export default async function VendorProfilePage({ params }) {
   const { vendorSlug } = await params
 
-  const vendor = vendorMap.find(v => v.slug === vendorSlug)
+  const vendor = activeVendors.find(v => v.slug === vendorSlug)
   if (!vendor) notFound()
 
   const storefrontUrl = `https://cfc.localline.ca/resto/vendor/${vendor.slug}`
@@ -164,7 +164,7 @@ export default async function VendorProfilePage({ params }) {
         ← Back to Vendors
       </Link>
 
-      {/* Header — renders immediately from static vendorMap */}
+      {/* Header — renders immediately from static activeVendors */}
       <div className="mb-10 overflow-hidden rounded-3xl border border-[#e2d8ca] bg-gradient-to-br from-[#fffdf8] to-[#f2e9db] p-8 shadow-[0_12px_32px_rgba(63,50,40,0.08)] md:p-10">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
           {vendor.logo && (

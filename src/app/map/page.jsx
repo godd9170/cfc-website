@@ -2,14 +2,14 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { vendorMap } from '../../data/vendors'
+import { activeVendors } from '../../data/vendors'
 import { VENDOR_COORDS } from '../../data/vendorCoords'
 
 const VendorMap = dynamic(() => import('../../components/VendorMap'), { ssr: false })
 
 export default function MapPage() {
-  const mappedVendors   = vendorMap.filter(v =>  VENDOR_COORDS[v.slug])
-  const unmappedVendors = vendorMap.filter(v => !VENDOR_COORDS[v.slug])
+  const mappedVendors   = activeVendors.filter(v =>  VENDOR_COORDS[v.slug])
+  const unmappedVendors = activeVendors.filter(v => !VENDOR_COORDS[v.slug])
 
   return (
     <div className="min-h-screen bg-[#f7f4ed] px-4 py-10">

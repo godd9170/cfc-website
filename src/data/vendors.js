@@ -25,3 +25,9 @@ export const vendorMap = [
 
 export const vendorList = vendorMap.map(v => v.name)
 
+// Vendors we no longer carry but may bring back. Hidden from the directory,
+// map, sitemap, and profile pages. Remove a slug to show that vendor again.
+// (Kept outside the generated block so sync-vendors.js preserves it.)
+export const HIDDEN_VENDOR_SLUGS = ['sunset-farms']
+
+export const activeVendors = vendorMap.filter(v => !HIDDEN_VENDOR_SLUGS.includes(v.slug))
