@@ -20,4 +20,5 @@ export const VENDOR_COORDS = {
   'hellyer-organics':  [44.052746149125696, -76.94783980970087], // County Road 7, North Marysburg
   'sheep-on-7':        [44.052708, -76.948333], // Cressy
   'silverwing-mushroom-co': [43.9958802, -77.1539645], // 146 County Rd 10, Picton (geocoded)
+  'the-royal-hotel':    [44.0080879, -77.1408069], // 247 Picton Main St, Picton (geocoded)
 }
