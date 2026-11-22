@@ -191,6 +191,32 @@ export default function LandingPage() {
             >
               Read the article →
             </a>
+
+            <div className="mt-5 border-t border-[#e2d8ca] pt-5">
+              <h3 className="mb-2 flex items-center gap-2 text-base font-semibold text-[#3F3228]">
+                As heard on
+                <img src="/cfm.svg" alt="County 99.3 FM" className="h-5 w-auto" />
+              </h3>
+              <p className="mb-3 text-sm leading-6 text-[#5f5244]">
+                We joined County 99.3 FM in May 2026 to talk about the collective.
+              </p>
+              <audio
+                controls
+                preload="metadata"
+                src="/cfm-segment.mp3"
+                className="mb-3 h-8 w-full"
+              >
+                Your browser does not support the audio element.
+              </audio>
+              <a
+                href="https://www.993countyfm.ca/podcast/?source=69473&mp3=podcast.993countyfm.ca:8000/Archive/CountyFM-Archive_2026-05-20_Wed_18.mp3"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-medium text-[#2F5D50] hover:underline"
+              >
+                Full show →
+              </a>
+            </div>
           </div>
 
           <div className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
