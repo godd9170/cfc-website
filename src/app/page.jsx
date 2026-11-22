@@ -97,7 +97,7 @@ export default function LandingPage() {
       <section id="newsletter" className="mx-auto w-full max-w-6xl scroll-mt-32 px-6 pb-12">
         <EmailCTA
           heading="Get the weekly harvest update"
-          subheading="A short weekly reminder before the order window closes — so you never miss your chance to stock up on the freshest local food from the County."
+          subheading="Sign up to be notified each week about when the order window opens, what's new, and any sales we have on! You can unsubscribe any time."
         />
       </section>
 
