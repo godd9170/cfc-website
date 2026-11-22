@@ -1,5 +1,5 @@
 import Link from "next/link";
-import EmailCTA from "../components/EmailCTA";
+import { HeroActions, OrderFlow } from "../components/OrderWindow";
 import Testimonials from "../components/Testimonials";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "../lib/site";
 
@@ -51,55 +51,11 @@ export default function LandingPage() {
             what you want each week, with no subscriptions, pre-set boxes, or
             ongoing commitments.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              href="https://cfc.localline.ca"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center rounded-full bg-brand-primary px-5 py-2.5 text-sm font-semibold text-[#f7f4ed] hover:bg-brand-primary-dark"
-            >
-              Shop this week
-            </a>
-            <Link
-              href="/customers"
-              className="inline-flex items-center rounded-full border border-[#c8bca9] bg-[#fffdf8] px-5 py-2.5 text-sm font-semibold text-[#3F3228] hover:bg-[#f5efe4]"
-            >
-              How ordering works
-            </Link>
-          </div>
+          <HeroActions />
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 pb-6">
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#e8b04a]/40 bg-[#fffbf0] px-6 py-4 shadow-[0_4px_16px_rgba(63,50,40,0.06)]">
-          <div className="flex items-center gap-3">
-            <span className="text-xl" aria-hidden="true">🌱</span>
-            <p className="text-sm text-[#3F3228]">
-              <span className="font-semibold">New to the Collective?</span>{" "}
-              Use code{" "}
-              <span className="rounded-md border border-[#e8b04a]/60 bg-[#fef3d0] px-2 py-0.5 font-mono text-xs font-bold tracking-wider text-[#3F3228]">
-                EATLOCAL
-              </span>{" "}
-              at checkout for 10% off your first order.
-            </p>
-          </div>
-          <a
-            href="https://cfc.localline.ca"
-            target="_blank"
-            rel="noreferrer"
-            className="flex-shrink-0 rounded-full bg-brand-amber px-4 py-2 text-xs font-semibold text-[#3F3228] hover:opacity-90"
-          >
-            Get Started
-          </a>
-        </div>
-      </section>
-
-      <section id="newsletter" className="mx-auto w-full max-w-6xl scroll-mt-32 px-6 pb-12">
-        <EmailCTA
-          heading="Get the weekly harvest update"
-          subheading="Sign up to be notified each week about when the order window opens, what's new, and any sales we have on! You can unsubscribe any time."
-        />
-      </section>
+      <OrderFlow />
 
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-6 pb-14 md:grid-cols-2">
         <article className="rounded-2xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)]">
