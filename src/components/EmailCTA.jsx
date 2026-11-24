@@ -9,6 +9,7 @@ export default function EmailCTA({
   buttonLabel = 'Join',
   successMessage,
   onSuccess,
+  getAttribution,
 }) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
@@ -20,7 +21,7 @@ export default function EmailCTA({
     setStatus('loading')
     setErrorMsg('')
 
-    const result = await subscribe({ email, firstName })
+    const result = await subscribe({ email, firstName, attribution: getAttribution?.() })
 
     if (result.ok) {
       setStatus('success')

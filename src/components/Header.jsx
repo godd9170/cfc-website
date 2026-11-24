@@ -26,12 +26,13 @@ const NAV_LINKS = [
   { href: "/contact",   label: "Contact" },
 ];
 
-// Ad landing pages get a logo-only header so visitors stay on the signup.
-const FOCUSED_PATHS = ["/join"];
+// Ad landing pages render without the site header.
+const HEADERLESS_PATHS = ["/join"];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const focused = FOCUSED_PATHS.includes(usePathname());
+  const pathname = usePathname();
+  if (HEADERLESS_PATHS.includes(pathname)) return null;
 
   return (
     <header className="sticky top-0 z-20 border-b border-[#e2d8ca] bg-[#fdfaf4]/95 backdrop-blur">
@@ -45,13 +46,13 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        {!focused && <nav className="hidden items-center gap-5 md:flex">
+        <nav className="hidden items-center gap-5 md:flex">
           {NAV_LINKS.map(({ href, label }) => (
             <NavLink key={href} href={href}>{label}</NavLink>
           ))}
-        </nav>}
+        </nav>
 
-        {!focused && <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <a
             href="https://cfc.localline.ca"
             target="_blank"
@@ -82,11 +83,11 @@ export default function Header() {
               </svg>
             )}
           </button>
-        </div>}
+        </div>
       </div>
 
       {/* Mobile menu */}
-      {open && !focused && (
+      {open && (
         <nav className="border-t border-[#e2d8ca] bg-[#fdfaf4] px-6 py-4 md:hidden">
           <ul className="flex flex-col gap-4">
             {NAV_LINKS.map(({ href, label }) => (

@@ -119,8 +119,10 @@ export class LocalLineError extends Error {
   }
 }
 
-export async function createCustomer({ email, firstName = '', lastName = '' }) {
-  const res = await post('/customers', { first_name: firstName, last_name: lastName, email })
+export async function createCustomer({ email, firstName = '', lastName = '', note }) {
+  const body = { first_name: firstName, last_name: lastName, email }
+  if (note) body.note = note
+  const res = await post('/customers', body)
 
   if (!res.ok) {
     const text = await res.text()
