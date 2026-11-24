@@ -2,7 +2,14 @@
 import { useState } from 'react'
 import { subscribe } from '../lib/actions'
 
-export default function EmailCTA({ heading, subheading, compact = false }) {
+export default function EmailCTA({
+  heading,
+  subheading,
+  compact = false,
+  buttonLabel = 'Join',
+  successMessage,
+  onSuccess,
+}) {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | already_exists | error
@@ -17,6 +24,7 @@ export default function EmailCTA({ heading, subheading, compact = false }) {
 
     if (result.ok) {
       setStatus('success')
+      onSuccess?.()
       setFirstName('')
       setEmail('')
     } else if (result.error === 'already_exists') {
@@ -36,7 +44,7 @@ export default function EmailCTA({ heading, subheading, compact = false }) {
         <p className="mt-1 text-sm text-[#6d5f50]">
           {status === 'already_exists'
             ? 'We already have you — keep an eye out for the weekly note before each order window.'
-            : 'We\'ll send you a note before each week\'s order window opens.'}
+            : successMessage || 'We\'ll send you a note before each week\'s order window opens.'}
         </p>
       </div>
     )
@@ -72,7 +80,7 @@ export default function EmailCTA({ heading, subheading, compact = false }) {
           disabled={status === 'loading'}
           className="rounded-full bg-brand-primary px-6 py-2.5 text-sm font-semibold text-[#f7f4ed] transition hover:bg-brand-primary-dark disabled:opacity-60"
         >
-          {status === 'loading' ? 'Joining…' : 'Join'}
+          {status === 'loading' ? 'Joining…' : buttonLabel}
         </button>
       </form>
 
