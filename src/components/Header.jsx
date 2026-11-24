@@ -27,7 +27,7 @@ const NAV_LINKS = [
 ];
 
 // Ad landing pages render without the site header.
-const HEADERLESS_PATHS = ["/join"];
+const HEADERLESS_PATHS = ["/join", "/join/thanks"];
 
 export default function Header() {
   const [open, setOpen] = useState(false);

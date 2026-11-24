@@ -37,6 +37,12 @@ function weekMinutes(now) {
   )
 }
 
+// How far through the week (Sunday 00:00 → Saturday 24:00, Toronto time)
+// we are, from 0 to 1.
+export function getWeekProgress(now = new Date()) {
+  return weekMinutes(now) / MINUTES_PER_WEEK
+}
+
 export function getOrderWindow(now = new Date()) {
   const m = weekMinutes(now)
   const isOpen = m >= OPEN_AT && m < CLOSE_AT

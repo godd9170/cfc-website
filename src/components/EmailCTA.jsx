@@ -7,7 +7,6 @@ export default function EmailCTA({
   subheading,
   compact = false,
   buttonLabel = 'Join',
-  successMessage,
   onSuccess,
   getAttribution,
 }) {
@@ -23,13 +22,16 @@ export default function EmailCTA({
 
     const result = await subscribe({ email, firstName, attribution: getAttribution?.() })
 
-    if (result.ok) {
-      setStatus('success')
-      onSuccess?.()
-      setFirstName('')
-      setEmail('')
-    } else if (result.error === 'already_exists') {
-      setStatus('already_exists')
+    if (result.ok || result.error === 'already_exists') {
+      const isNew = Boolean(result.ok)
+      // A caller-supplied onSuccess takes over from here (e.g. navigating to
+      // a thank-you page), so leave the form in its loading state.
+      if (onSuccess) return onSuccess({ isNew })
+      setStatus(isNew ? 'success' : 'already_exists')
+      if (isNew) {
+        setFirstName('')
+        setEmail('')
+      }
     } else {
       setStatus('error')
       setErrorMsg(result.error || 'Something went wrong')
@@ -45,7 +47,7 @@ export default function EmailCTA({
         <p className="mt-1 text-sm text-[#6d5f50]">
           {status === 'already_exists'
             ? 'We already have you — keep an eye out for the weekly note before each order window.'
-            : successMessage || 'We\'ll send you a note before each week\'s order window opens.'}
+            : 'We\'ll send you a note before each week\'s order window opens.'}
         </p>
       </div>
     )

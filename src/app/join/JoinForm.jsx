@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import EmailCTA from '../../components/EmailCTA'
 import { trackPixel } from '../../components/MetaPixel'
 
@@ -16,22 +17,28 @@ function readAttribution() {
   return attribution
 }
 
-// Email signup that saves UTM attribution on the new LocalLine customer and
-// reports the lead to Meta Pixel and GA, for new subscribers only (not for
-// addresses that are already on the list).
+// Email signup that saves UTM attribution on the new LocalLine customer,
+// reports new leads to Meta Pixel and GA, then moves to the thank-you page.
+// Addresses already on the list skip the lead events but still see the
+// thank-you page.
 export default function JoinForm(props) {
-  function handleSuccess() {
-    const attribution = readAttribution()
-    trackPixel('Lead', { content_name: 'order_window_reminder' })
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'generate_lead', { form: 'order_window_reminder', ...attribution })
+  const router = useRouter()
+
+  function handleSuccess({ isNew }) {
+    if (isNew) {
+      trackPixel('Lead', { content_name: 'order_window_reminder' })
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', { form: 'order_window_reminder', ...readAttribution() })
+      }
     }
+    // Client-side navigation keeps this page's JS alive, so the pixel and GA
+    // requests fired above aren't cancelled by a page unload.
+    router.push('/join/thanks')
   }
 
   return (
     <EmailCTA
       buttonLabel="Remind me"
-      successMessage="We'll email you every Sunday when ordering opens. Don't forget code EATLOCAL for 10% off your first order."
       getAttribution={readAttribution}
       onSuccess={handleSuccess}
       {...props}

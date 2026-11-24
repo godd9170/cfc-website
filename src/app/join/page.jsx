@@ -1,6 +1,7 @@
+import Image from 'next/image'
 import MetaPixel from '../../components/MetaPixel'
-import VendorLogo from '../../components/VendorLogo'
 import { activeVendors } from '../../data/vendors'
+import { featuredProducts } from '../../data/featuredProducts'
 import JoinForm from './JoinForm'
 import WeekCadence from './WeekCadence'
 
@@ -27,15 +28,36 @@ export default function JoinPage() {
               County Farm Collective
             </span>
           </div>
-          <h1 className="text-3xl font-bold leading-tight tracking-tight text-[#3F3228] md:text-4xl">
-            Prince Edward County&apos;s farms,
-            <br className="hidden sm:block" /> one order a week.
+          <h1 className="text-balance text-3xl font-bold leading-tight tracking-tight text-[#3F3228] md:text-4xl">
+            Shop seasonal Prince Edward County farm fresh food, every week
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base leading-7 text-[#6d5f50]">
             No subscription, no pre-set boxes. Shop what you want, when you
             want.
           </p>
         </header>
+
+        {/* Best sellers */}
+        <ul className="mb-8 grid grid-cols-4 gap-2 sm:gap-3" aria-label="Popular this season">
+          {featuredProducts.map((p, i) => (
+            <li key={p.name}>
+              <Image
+                src={p.image}
+                alt={`${p.name} from ${p.vendor}`}
+                width={320}
+                height={320}
+                sizes="(min-width: 768px) 170px, 25vw"
+                priority={i < 4}
+                className="aspect-square w-full rounded-xl object-cover shadow-[0_6px_16px_rgba(63,50,40,0.12)]"
+              />
+              <p className="mt-2 hidden text-center text-xs leading-4 text-[#6d5f50] sm:block">
+                <span className="font-semibold text-[#3F3228]">{p.name}</span>
+                <br />
+                {p.vendor}
+              </p>
+            </li>
+          ))}
+        </ul>
 
         <section className="mb-14" aria-label="Get a reminder">
           <JoinForm
@@ -54,10 +76,23 @@ export default function JoinPage() {
           <h2 id="farms-heading" className="mb-5 text-lg font-semibold text-[#3F3228]">
             {activeVendors.length} local farms &amp; makers
           </h2>
-          <ul className="flex flex-wrap justify-center gap-2.5">
+          {/* Masonry: logos keep their own shapes, flowing down CSS columns. */}
+          <ul className="columns-3 gap-3 sm:columns-4 md:columns-5">
             {activeVendors.map((v) => (
-              <li key={v.slug} title={v.name}>
-                <VendorLogo name={v.name} src={v.logo} className="h-14 w-14" />
+              <li key={v.slug} className="mb-3 break-inside-avoid">
+                {v.logo ? (
+                  <img
+                    src={v.logo}
+                    alt={v.name}
+                    title={v.name}
+                    loading="lazy"
+                    className="w-full rounded-lg shadow-[0_4px_12px_rgba(63,50,40,0.08)]"
+                  />
+                ) : (
+                  <span className="block rounded-lg bg-[#efe7da] px-3 py-5 font-amatic text-2xl font-bold leading-none text-[#3F3228]">
+                    {v.name}
+                  </span>
+                )}
               </li>
             ))}
           </ul>

@@ -1,3 +1,5 @@
+import NowMarker from './NowMarker'
+
 // A one-week timeline (Sunday → Saturday) showing when ordering is open,
 // when farms harvest, and when orders go out. Positions are fractions of
 // the week, so bars line up with the real times.
@@ -49,26 +51,29 @@ export default function WeekCadence() {
         </div>
 
         {/* Track */}
-        <div className="relative h-14 overflow-hidden rounded-xl border border-[#e2d8ca] bg-[#fffdf8] sm:h-16">
-          <div className="absolute inset-0 grid grid-cols-7" aria-hidden="true">
-            {DAYS.map((d, i) => (
-              <span key={d} className={i ? 'border-l border-[#efe7da]' : ''} />
+        <div className="relative">
+          <div className="relative h-14 overflow-hidden rounded-xl border border-[#e2d8ca] bg-[#fffdf8] sm:h-16">
+            <div className="absolute inset-0 grid grid-cols-7" aria-hidden="true">
+              {DAYS.map((d, i) => (
+                <span key={d} className={i ? 'border-l border-[#efe7da]' : ''} />
+              ))}
+            </div>
+            {PHASES.map((p) => (
+              <div
+                key={p.key}
+                className={`absolute inset-y-2 flex items-center justify-center rounded-lg ${p.color} ${p.text}`}
+                style={{ left: `calc(${p.from}% + 3px)`, width: `calc(${p.to - p.from}% - 6px)` }}
+              >
+                <span className="hidden truncate px-2 text-xs font-semibold sm:block">{p.label}</span>
+              </div>
             ))}
           </div>
-          {PHASES.map((p) => (
-            <div
-              key={p.key}
-              className={`absolute inset-y-2 flex items-center justify-center rounded-lg ${p.color} ${p.text}`}
-              style={{ left: `calc(${p.from}% + 3px)`, width: `calc(${p.to - p.from}% - 6px)` }}
-            >
-              <span className="hidden truncate px-2 text-xs font-semibold sm:block">{p.label}</span>
-            </div>
-          ))}
+          <NowMarker />
         </div>
       </div>
 
       {/* Legend */}
-      <figcaption className="mt-6 grid gap-5 sm:grid-cols-3">
+      <figcaption className="mt-10 grid gap-5 sm:grid-cols-3">
         {PHASES.map((p) => (
           <div key={p.key} className="flex gap-3">
             <span className={`mt-1 h-3 w-3 flex-shrink-0 rounded-full ${p.color}`} aria-hidden="true" />
