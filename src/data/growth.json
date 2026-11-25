@@ -1,0 +1,167 @@
+{
+  "generatedAt": "2026-11-25T03:14:47.588Z",
+  "cutoff": "2026-11-24",
+  "years": {
+    "2025": {
+      "orders": 249,
+      "sales": 18357,
+      "producerPayout": 16107,
+      "units": 1733,
+      "customers": 60,
+      "repeatCustomers": 38,
+      "returningFromPriorYear": null,
+      "vendors": 9,
+      "products": 103,
+      "firstDate": "2025-05-11",
+      "lastDate": "2025-12-25",
+      "fulfillment": {
+        "delivery": 217,
+        "pickup": 32
+      },
+      "months": {
+        "5": {
+          "sales": 488,
+          "orders": 5
+        },
+        "6": {
+          "sales": 2175,
+          "orders": 20
+        },
+        "7": {
+          "sales": 3569,
+          "orders": 30
+        },
+        "8": {
+          "sales": 3027,
+          "orders": 22
+        },
+        "9": {
+          "sales": 1764,
+          "orders": 16
+        },
+        "10": {
+          "sales": 3617,
+          "orders": 65
+        },
+        "11": {
+          "sales": 2787,
+          "orders": 63
+        },
+        "12": {
+          "sales": 930,
+          "orders": 28
+        }
+      },
+      "vendorNames": [
+        "Edwin County Farms",
+        "Nomad Mushrooms PEC",
+        "Paper Kite",
+        "Return to Earth",
+        "Rorafresh",
+        "Scott Farms",
+        "Sunset Farms",
+        "van Stone Farms",
+        "Vicki's Veggies"
+      ],
+      "newVendorNames": []
+    },
+    "2026": {
+      "orders": 996,
+      "sales": 56324,
+      "producerPayout": 47932,
+      "units": 7122,
+      "customers": 166,
+      "repeatCustomers": 108,
+      "returningFromPriorYear": 38,
+      "vendors": 20,
+      "products": 451,
+      "firstDate": "2026-01-01",
+      "lastDate": "2026-11-19",
+      "fulfillment": {
+        "delivery": 435,
+        "pickup": 561
+      },
+      "months": {
+        "1": {
+          "sales": 545,
+          "orders": 12
+        },
+        "2": {
+          "sales": 762,
+          "orders": 19
+        },
+        "3": {
+          "sales": 1229,
+          "orders": 31
+        },
+        "4": {
+          "sales": 3442,
+          "orders": 101
+        },
+        "5": {
+          "sales": 5131,
+          "orders": 116
+        },
+        "6": {
+          "sales": 4802,
+          "orders": 98
+        },
+        "7": {
+          "sales": 9393,
+          "orders": 160
+        },
+        "8": {
+          "sales": 6647,
+          "orders": 107
+        },
+        "9": {
+          "sales": 8223,
+          "orders": 114
+        },
+        "10": {
+          "sales": 9588,
+          "orders": 128
+        },
+        "11": {
+          "sales": 6563,
+          "orders": 110
+        }
+      },
+      "vendorNames": [
+        "Brackens",
+        "Edwin County Farms",
+        "Fiddlehead Farm",
+        "Hellyer Organics",
+        "Lamb's Quarters Farm",
+        "Mohawk Bison Ranch",
+        "Nomad Mushrooms PEC",
+        "Once Upon a Farm",
+        "Paper Kite",
+        "Portico Gardens",
+        "Ravensview Farm",
+        "Return to Earth",
+        "Rorafresh",
+        "Scott Farms",
+        "Sheep on 7 Sourdough",
+        "Silverwing Mushroom Co.",
+        "Sunset Farms",
+        "The Elmbrook Farm",
+        "van Stone Farms",
+        "Vicki's Veggies"
+      ],
+      "newVendorNames": [
+        "Brackens",
+        "Fiddlehead Farm",
+        "Hellyer Organics",
+        "Lamb's Quarters Farm",
+        "Mohawk Bison Ranch",
+        "Once Upon a Farm",
+        "Portico Gardens",
+        "Ravensview Farm",
+        "Sheep on 7 Sourdough",
+        "Silverwing Mushroom Co.",
+        "The Elmbrook Farm"
+      ]
+    }
+  }
+}
