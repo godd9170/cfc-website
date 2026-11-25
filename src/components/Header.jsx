@@ -26,8 +26,8 @@ const NAV_LINKS = [
   { href: "/contact",   label: "Contact" },
 ];
 
-// Ad landing pages render without the site header.
-const HEADERLESS_PATHS = ["/join", "/join/thanks"];
+// Ad landing pages and the unlisted growth report render without the site header.
+const HEADERLESS_PATHS = ["/join", "/join/thanks", "/growth"];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
