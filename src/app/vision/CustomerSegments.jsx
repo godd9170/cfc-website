@@ -97,7 +97,7 @@ export default function CustomerSegments() {
           </table>
         </div>
         <p className="mt-3 text-xs leading-5 text-[#8a7b69]">
-          Online sales keep the fee-added marketplace fee; the walk-in market keeps its retail margin (plus the margin on food grown on site); wholesale keeps the wholesale margin.
+          Online and walk-in sales are consigned: the terminal keeps the consignment rate (and the full value of food grown on site); wholesale keeps the wholesale margin.
           Walk-in sales need a retail module. Wholesale orders count toward fulfillment capacity and are each delivered.
         </p>
       </div>

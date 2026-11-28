@@ -351,8 +351,8 @@ export const WHOLESALE_SEGMENTS = [
 // ── Income streams (labels shared by the builder and the operating model) ──
 
 export const STREAMS = {
-  marketplace: 'Online marketplace fees',
-  retail: 'Retail gross profit',
+  marketplace: 'Consignment: online sales',
+  retail: 'Consignment: walk-in market',
   storage: 'Storage rental',
   wholesale: 'Wholesale margin (restaurants, grocers, institutions)',
   onsite: 'On-site food production',
@@ -385,9 +385,8 @@ export const PARAMS = {
   addressablePct: { group: 'market', label: 'Addressable by regional producers', kind: 'pct', min: 0.05, max: 1, step: 0.01, default: 0.3, term: 'addressable', help: 'Share of food spending regional producers could plausibly supply.' },
   capturePct: { group: 'market', label: 'Market capture', kind: 'pct', min: 0, max: 0.3, step: 0.0025, default: 0.04, term: 'capture', help: 'Share of the addressable market the terminal earns. Never more than the addressable market.' },
   aov: { group: 'market', label: 'Average order value', kind: 'cad', min: 30, max: 200, step: 5, default: 75, term: 'aov' },
-  markupPct: { group: 'market', label: 'Marketplace fee (added to producer price)', kind: 'pct', min: 0, max: 0.4, step: 0.005, default: 0.18, term: 'commission', help: 'CFC’s fee-added model: producers set their price and the fee is added on top.' },
+  consignmentPct: { group: 'market', label: 'Consignment rate', kind: 'pct', min: 0, max: 0.5, step: 0.01, default: 0.2, term: 'consignment', help: 'Share of each sale the terminal keeps. Producers consign their products and receive the rest when they sell, online or walk-in.' },
   retailMixPct: { group: 'market', label: 'Retail share of sales', kind: 'pct', min: 0, max: 0.8, step: 0.05, default: 0.3, help: 'Walk-in retail sales, the rest through the online marketplace. Needs a retail module.' },
-  retailMarginPct: { group: 'market', label: 'Retail gross margin', kind: 'pct', min: 0.15, max: 0.5, step: 0.01, default: 0.35, term: 'grossMargin' },
 
   // Wholesale customers (Section F): businesses buying on top of household demand
   restaurantAccounts: { group: 'wholesale', label: 'Restaurant accounts', kind: 'count', min: 0, max: 60, step: 1, default: 8, help: 'Restaurants, cafés and winery kitchens ordering weekly.' },
@@ -482,7 +481,7 @@ export const SCENARIOS = [
     id: 'conservative', label: 'Conservative',
     blurb: 'A smaller first build, slow uptake, thinner margins, higher contingency.',
     modules: { fulfillment: 1, cold: 1, hydroponic: 0 },
-    overrides: { capturePct: 0.02, weeklySpend: 210, addressablePct: 0.25, aov: 65, retailMarginPct: 0.3, storageOccupancy: 0.5, restaurantAccounts: 5, grocerAccounts: 1, contingencyPct: 0.2 },
+    overrides: { capturePct: 0.02, weeklySpend: 210, addressablePct: 0.25, aov: 65, storageOccupancy: 0.5, restaurantAccounts: 5, grocerAccounts: 1, contingencyPct: 0.2 },
   },
   { id: 'base', label: 'Base', blurb: 'The default illustrative terminal and assumptions.', modules: {}, overrides: {} },
   {
@@ -490,7 +489,7 @@ export const SCENARIOS = [
     blurb: 'A larger terminal sized to stronger uptake and healthy commercial demand.',
     // The smallest build that clears every capacity flag at this demand.
     modules: { fulfillment: 3, cold: 3, frozen: 2, dry: 2, combined: 1, retail: 2, kitchen: 1 },
-    overrides: { capturePct: 0.07, weeklySpend: 250, addressablePct: 0.35, aov: 85, retailMarginPct: 0.38, storageOccupancy: 0.85, restaurantAccounts: 15, restaurantWeekly: 350, grocerAccounts: 4, institutionAccounts: 1, contingencyPct: 0.1 },
+    overrides: { capturePct: 0.07, weeklySpend: 250, addressablePct: 0.35, aov: 85, storageOccupancy: 0.85, restaurantAccounts: 15, restaurantWeekly: 350, grocerAccounts: 4, institutionAccounts: 1, contingencyPct: 0.1 },
   },
 ]
 
@@ -517,9 +516,8 @@ export const GLOSSARY = {
   addressable: { term: 'Addressable market', def: 'The part of regional food spending that regional producers could realistically supply: fresh produce, meat, dairy, eggs, baked goods and preserves, but not bananas or coffee beans.' },
   capture: { term: 'Market capture', def: 'The share of the addressable market the terminal actually earns. It can never exceed the addressable market itself.' },
   aov: { term: 'Average order value', def: 'The average amount a customer spends per order. Used to turn sales into an equivalent number of weekly orders.' },
-  commission: { term: 'Effective commission', def: 'CFC uses a fee-added model: the producer sets their price and the fee is added on top. An 18% fee means the terminal keeps 18 ÷ 118 ≈ 15.3% of what the customer pays, and the producer receives their full price.' },
-  grossMargin: { term: 'Gross margin', def: 'Retail sales minus the cost of the goods sold, as a share of sales. It is what the shop keeps before paying staff, rent and other overheads.' },
-  retained: { term: 'Retained revenue', def: 'The money the terminal keeps after producers are paid: marketplace fees, retail gross profit and the margin on food it grows itself.' },
+  consignment: { term: 'Consignment', def: 'Producers place their products with the terminal and keep ownership until they sell. When an item sells, online or in the market, the terminal keeps the consignment rate and pays the producer the rest. There are no marketplace fees and no wholesale buying of stock.' },
+  retained: { term: 'Retained revenue', def: 'The money the terminal keeps after producers are paid: its consignment share of online and walk-in sales, the wholesale margin and the full value of food it grows itself.' },
   payouts: { term: 'Producer payouts', def: 'Money paid to regional producers for the food sold through the terminal.' },
   capex: { term: 'Capital to provide', def: 'One-time cost to set up the facilities: site, containers, equipment, fees and contingency. The approach assumed here is that partners provide the facilities and CFC leases them, so this is what partners or funders would need to put in, not CFC debt.' },
   opex: { term: 'Operating costs', def: 'Recurring monthly costs of running the terminal: staff, rent, utilities, insurance, delivery, software and losses.' },

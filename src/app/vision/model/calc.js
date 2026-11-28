@@ -81,16 +81,17 @@ export function computeCore(a, modules, capex = computeCapex(a, modules), capaci
   const marketplaceSales = annualSales - retailSales
   const marketplaceOrdersWeekly = a.aov > 0 ? marketplaceSales / WEEKS / a.aov : 0
 
-  // Fee-added model: producer price P, customer pays P × (1 + fee).
-  const effectiveCommission = a.markupPct / (1 + a.markupPct)
+  // Consignment: producers own the stock until it sells; the terminal keeps
+  // the consignment rate on every sale, online or walk-in.
+  const effectiveCommission = a.consignmentPct
   const marketplaceFees = marketplaceSales * effectiveCommission
-  const retailGrossProfit = retailSales * a.retailMarginPct
+  const retailGrossProfit = retailSales * effectiveCommission
 
-  // On-site growing replaces product the retail shop would otherwise buy from
-  // producers. It adds the avoided cost of goods, not extra sales, so it is
+  // On-site growing replaces consigned product in the retail market. The
+  // terminal keeps the producer's share too, not extra sales, so it is
   // never counted twice. Output beyond retail sales has no channel.
   const grownSold = hasRetail ? Math.min(capacity.growAnnual, retailSales) : 0
-  const onsiteMargin = grownSold * (1 - a.retailMarginPct)
+  const onsiteMargin = grownSold * (1 - effectiveCommission)
 
   const retainedTrading = marketplaceFees + retailGrossProfit + onsiteMargin
   const householdPayouts = annualSales - retainedTrading
@@ -172,7 +173,7 @@ export function computeCore(a, modules, capex = computeCapex(a, modules), capaci
     delivery: ordersMonthly * a.deliveryShare * (a.deliveryCost - a.deliveryFee) + wholesaleOrdersMonthly * a.deliveryCost,
     software: a.softwareMonthly + (totalGmv * a.paymentPct) / 12,
     maintenance: (capex.total * a.maintenancePctCapex) / 12,
-    inventoryLoss: (retailSales * (1 - a.retailMarginPct) * a.retailShrinkPct + marketplaceSales * a.marketplaceLossPct) / 12,
+    inventoryLoss: (retailSales * (1 - effectiveCommission) * a.retailShrinkPct + marketplaceSales * a.marketplaceLossPct) / 12,
   }
   const operatingCosts = Object.values(costs).reduce((s, v) => s + v, 0)
 

@@ -101,7 +101,7 @@ export default function OperatingModel() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
         <dl className="grid grid-cols-2 content-start gap-3" aria-live="polite">
-          <Stat label="Retained trading income" term="retained" value={`${fmtCad(model.tradingIncome)}`} sub="per month · marketplace fees, retail & on-site margin" />
+          <Stat label="Retained trading income" term="retained" value={`${fmtCad(model.tradingIncome)}`} sub="per month · consignment share, wholesale & on-site" />
           <Stat label="Net service income" value={fmtCad(model.serviceIncome)} sub="per month · wholesale, storage & producer services" />
           <Stat label="Operating costs" term="opex" value={fmtCad(model.operatingCosts)} sub={<>per month, including the facility lease · <a href="#cost-breakdown" className="font-semibold text-[#2F5D50] hover:underline">see breakdown</a></>} />
           <Stat label={model.surplus >= 0 ? 'Operating surplus' : 'Operating deficit'} term="surplus" value={fmtCad(model.surplus)} sub="per month, pre-tax" tone={surplusTone} />
@@ -187,8 +187,8 @@ export default function OperatingModel() {
         <p className="font-semibold text-[#3F3228]">How these figures are calculated</p>
         <ul className="mt-2 list-disc space-y-1 pl-4">
           <li>Households = population ÷ household size. Regional spending = households × weekly spending × 52. Terminal sales = regional spending × addressable share × capture.</li>
-          <li>Marketplace income uses CFC’s fee-added model: effective commission = fee ÷ (1 + fee). Retail income is retail sales × gross margin. Producer payouts are sales minus what the terminal retains.</li>
-          <li>On-site growing is sold through the retail market. It adds the cost of goods the shop would otherwise pay producers, not extra sales, so it is never double-counted. Output beyond retail sales is excluded.</li>
+          <li>CFC sells on consignment: producers own their products until they sell, and the terminal keeps the consignment rate on every online and walk-in sale. There are no marketplace fees. Producer payouts are sales minus what the terminal retains.</li>
+          <li>On-site growing is sold through the retail market. The terminal keeps the share it would otherwise pay producers, not extra sales, so it is never double-counted. Output beyond retail sales is excluded.</li>
           <li>Break-even holds the sales mix and every other assumption fixed, then searches for the capture at which income covers fixed and variable costs. It ignores capacity limits.</li>
           <li><strong>Facilities:</strong> the facilities are assumed to be provided by partners and leased to CFC. The capital figure is what partners or funders would need to put in; CFC’s cost is the monthly facility lease, so no loan repayments or capital payback are modelled. <strong>Tax:</strong> all figures are pre-tax; income tax, HST, depreciation and inflation are not modelled.</li>
           <li>Every figure is an illustrative assumption in CAD, not CFC financial data or a verified construction quotation.</li>

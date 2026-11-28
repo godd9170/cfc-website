@@ -51,13 +51,6 @@ function Section({ id, index, eyebrow, title, children, intro, tone = 'plain' })
   )
 }
 
-const ROADMAP = [
-  { title: 'Digital marketplace', status: 'Existing operations', body: 'Producer aggregation, online sales and coordinated fulfillment.', current: true },
-  { title: 'Permanent home', status: 'Proposed', body: 'Dedicated fulfillment, refrigeration and customer pickup in leased space at a proposed site at Base31. The Starter scenario models this step.' },
-  { title: 'Regional food terminal', status: 'Future concept', body: 'Retail, frozen and dry storage and shared producer infrastructure, growing alongside the new neighbourhood planned north of Kingsley Road.' },
-  { title: 'Living food campus', status: 'Long-term concept', body: 'Modular growing, shared producer services such as egg grading, grain milling and butchery, community spaces, and a tested model that other regions can adapt and connect to.' },
-]
-
 export default function VisionPage() {
   return (
     <div className="overflow-x-clip">
@@ -204,76 +197,6 @@ export default function VisionPage() {
           <NetworkScale />
         </Section>
       </VisionProvider>
-
-      {/* I — Roadmap */}
-      <Section
-        id="pec"
-        index="07"
-        eyebrow="Where it begins"
-        title="Starting in Prince Edward County"
-        tone="band"
-        intro={<>
-          <p>County Farm Collective already connects independent local producers with households and restaurants through a shared digital marketplace.</p>
-          <p>Our demand-driven ordering model allows producers to prepare food against actual customer orders, helping limit unnecessary inventory.</p>
-          <p>A permanent physical location represents a potential next step: combining this existing digital infrastructure with shared agricultural, storage, retail and distribution infrastructure.</p>
-        </>}
-      >
-        <ol className="relative grid gap-4 md:grid-cols-4">
-          <span aria-hidden="true" className="absolute left-[1.15rem] top-4 h-[calc(100%-2rem)] w-px border-l-2 border-dashed border-[#c8bca9] md:left-4 md:right-4 md:top-[1.15rem] md:h-px md:w-auto md:border-l-0 md:border-t-2" />
-          {ROADMAP.map((p, i) => (
-            <li key={p.title} className="relative flex gap-4 md:block">
-              <span className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${p.current ? 'border-[#2F5D50] bg-[#2F5D50] text-white' : 'border-[#c8bca9] bg-[#F6F1E7] text-[#6d5f50]'}`}>{i + 1}</span>
-              <div className={`flex-1 rounded-2xl border p-5 md:mt-4 ${p.current ? 'border-[#2F5D50] bg-[#fffdf8] shadow-[0_8px_24px_rgba(47,93,80,0.12)]' : 'border-dashed border-[#c8bca9] bg-transparent'}`}>
-                <p className={`text-[11px] font-bold uppercase tracking-[0.16em] ${p.current ? 'text-[#2F5D50]' : 'text-[#8a7b69]'}`}>{p.current ? '● ' : ''}{p.status}</p>
-                <h3 className="mt-2 text-lg font-bold text-[#3F3228]">{p.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#5f5244]">{p.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-6 text-sm text-[#8a7b69]">Only phase 1 exists today. Phases 2–4 are proposals and concepts, not commitments.</p>
-
-        <div className="mt-14 grid gap-8 rounded-3xl border border-[#e2d8ca] bg-[#fffdf8] p-6 shadow-[0_8px_24px_rgba(63,50,40,0.06)] md:p-10 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">Proposed site</p>
-            <h3 className="mt-2 text-2xl font-bold leading-tight text-[#3F3228] md:text-3xl">Base31: food infrastructure planned alongside new homes</h3>
-            <div className="mt-4 space-y-4 text-base leading-7 text-[#5f5244]">
-              <p>
-                We are proposing Base31, the former air base on the edge of Picton, as the home for the County’s pilot terminal.
-                The land north of Kingsley Road is proposed for a new residential neighbourhood, the first phase of a long-term plan for new homes on the site.
-              </p>
-              <p>
-                New neighbourhoods are planned with roads, water, power and sewers from the start. Food is usually left to whatever
-                retail follows, often years later and a car trip away. A terminal next to a growing neighbourhood would let food
-                infrastructure be planned with the homes it serves.
-              </p>
-            </div>
-          </div>
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {[
-              ['Demand that moves in with residents', 'Every new household buys food every week from the day it arrives. The terminal doesn’t have to create a market, only earn a share of one that is already forming.'],
-              ['Within walking distance', 'Pickup, a market hall and a courtyard a short walk or bike ride from new front doors, on the way home rather than a drive out of town.'],
-              ['Growing in step', 'Modules can be added as each phase of housing is completed, so capacity follows real demand instead of running ahead of it.'],
-              ['A shared place', 'A courtyard and market give a new neighbourhood somewhere to meet the farmers who feed it.'],
-            ].map(([t, b]) => (
-              <li key={t} className="rounded-2xl border border-[#efe6d8] bg-[#F6F1E7]/60 p-5">
-                <h4 className="text-base font-bold text-[#3F3228]">{t}</h4>
-                <p className="mt-2 text-sm leading-6 text-[#5f5244]">{b}</p>
-              </li>
-            ))}
-          </ul>
-          <div className="space-y-3 border-t border-[#efe6d8] pt-6 text-sm leading-6 text-[#5f5244] lg:col-span-2">
-            <p>
-              <strong className="text-[#3F3228]">One terminal for the County.</strong> We don’t see Prince Edward County needing more than one.
-              The pilot exists to prove or disprove the model, so that other regions can learn from what works and what doesn’t.
-            </p>
-            <p>
-              Try it: set <a href="#market" className="font-semibold text-[#2F5D50] underline-offset-2 hover:underline">new households nearby</a> in the market simulator to see how a growing neighbourhood changes the terminal’s economics.
-            </p>
-            <p className="text-xs text-[#8a7b69]">The site, any partnership and the timing are proposals, subject to agreement, feasibility studies, funding and approvals. The housing plans are Base31’s own and are outside CFC’s control.</p>
-          </div>
-        </div>
-      </Section>
 
       {/* J — Closing */}
       <section aria-labelledby="closing-title" className="bg-[#3F3228] text-[#f6f1e7]">

@@ -88,7 +88,7 @@ export default function MarketSimulator() {
           <Stat label="Annual terminal sales" term="gmv" value={fmtCadCompact(model.totalGmv)} sub={`Households ${fmtCadCompact(model.annualSales)} (${fmtPct(model.capture, 1)} capture) + wholesale ${fmtCadCompact(model.wholesaleGmv)}`} tone="good" />
           <Stat label="Weekly orders (equivalent)" term="aov" value={fmtNum(model.weeklyOrders + model.wholesaleOrdersWeekly)} sub={`${fmtNum(model.weeklyOrders)} household at ${fmtCad(state.a.aov)} + ${fmtNum(model.wholesaleOrdersWeekly)} wholesale`} />
           <Stat label="Annual producer payouts" term="payouts" value={fmtCadCompact(model.producerPayouts)} sub="Retail and wholesale" />
-          <Stat label="Terminal retained revenue" term="retained" value={fmtCadCompact(model.totalRetained)} sub={`Online effective commission ${fmtPct(model.effectiveCommission, 1)}`} />
+          <Stat label="Terminal retained revenue" term="retained" value={fmtCadCompact(model.totalRetained)} sub={`Consignment rate ${fmtPct(model.effectiveCommission, 0)}`} />
         </dl>
 
         <div className="grid gap-5 rounded-3xl border border-[#e2d8ca] bg-[#fffdf8] p-5 md:grid-cols-2">
@@ -100,7 +100,7 @@ export default function MarketSimulator() {
             <h3 className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-[#8a7b69]" style={{ fontFamily: 'inherit' }}>Where each sales dollar goes</h3>
             <SplitBar model={model} />
             <p className="mt-3 text-xs leading-5 text-[#8a7b69]">
-              Sales are gross merchandise value, not terminal revenue. Most of each dollar is paid to producers. Online sales use CFC’s fee-added model; retail uses a gross margin; on-site growing replaces purchased stock rather than adding sales.
+              Sales are gross merchandise value, not terminal revenue. Most of each dollar is paid to producers. Online and walk-in sales are consigned, so the terminal keeps the consignment rate; on-site growing replaces consigned stock rather than adding sales.
             </p>
           </div>
         </div>
