@@ -51,15 +51,6 @@ function Section({ id, index, eyebrow, title, children, intro, tone = 'plain' })
   )
 }
 
-const ENERGY = [
-  ['Small Modular Reactors', 'Small Regional Food Terminals'],
-  ['Distributed generation', 'Regional agricultural production'],
-  ['Battery storage', 'Cold, frozen and dry storage'],
-  ['Microgrids', 'Regional food networks'],
-  ['Energy security', 'Food security'],
-  ['Modular generating capacity', 'Modular food infrastructure'],
-]
-
 const ROADMAP = [
   { title: 'Digital marketplace', status: 'Existing operations', body: 'Producer aggregation, online sales and coordinated fulfillment.', current: true },
   { title: 'Permanent home', status: 'Proposed', body: 'Dedicated fulfillment, refrigeration and customer pickup in leased space at a proposed site at Base31. The Starter scenario models this step.' },
@@ -116,7 +107,7 @@ export default function VisionPage() {
           intro={<>
             <p>The industrial economy was built around centralized production and geographically dispersed markets.</p>
             <p>For a factory manufacturing a specialized product, this makes sense. Its customers may be scattered across the world, and economies of scale justify concentrating production in one location.</p>
-            <p className="font-semibold text-[#3F3228]">Food, like energy, is fundamentally different.</p>
+            <p className="font-semibold text-[#3F3228]">Food is fundamentally different.</p>
             <p>Every household is already in the market. Demand is universal, continuous and geographically distributed. A community doesn’t need to be convinced to consume food; it needs infrastructure that connects its existing demand with an available supply.</p>
             <p>Yet we have largely applied the same centralized industrial architecture to food.</p>
             <p className="font-semibold text-[#3F3228]">What if we designed the system around the geography of consumption instead?</p>
@@ -125,50 +116,12 @@ export default function VisionPage() {
           <NetworkComparison />
         </Section>
 
-        {/* C — Lessons from energy */}
-        <Section
-          id="energy"
-          index="02"
-          eyebrow="A parallel"
-          title="Lessons from energy"
-          intro={<>
-            <p>The energy sector offers an interesting parallel. Alongside traditional large-scale generation, technologies such as Small Modular Reactors (SMRs), distributed generation, energy storage and microgrids offer different approaches to infrastructure.</p>
-            <p>We believe a similar philosophy deserves exploration in food.</p>
-          </>}
-        >
-          <div className="overflow-hidden rounded-3xl border border-[#e2d8ca] bg-[#fffdf8]">
-            <table className="w-full text-left">
-              <caption className="sr-only">Energy infrastructure concepts and their food system equivalents</caption>
-              <thead>
-                <tr className="bg-[#3F3228] text-[#fffdf8]">
-                  <th scope="col" className="w-1/2 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] sm:px-6">Energy</th>
-                  <th scope="col" className="w-1/2 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#e8b04a] sm:px-6">Food</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ENERGY.map(([e, f]) => (
-                  <tr key={e} className="border-t border-[#efe6d8]">
-                    <td className="px-4 py-4 text-sm text-[#6d5f50] sm:px-6 sm:text-base">
-                      <span className="flex items-center justify-between gap-3">{e}<span aria-hidden="true" className="text-[#c8bca9]">→</span></span>
-                    </td>
-                    <td className="px-4 py-4 text-sm font-semibold text-[#3F3228] sm:px-6 sm:text-base">{f}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-6 max-w-3xl text-base leading-7 text-[#5f5244] md:text-lg md:leading-8">
-            The objective is not to eliminate large-scale infrastructure, but to build complementary regional capacity where it makes economic and practical sense.
-          </p>
-        </Section>
-
         {/* D — The SRFT */}
         <Section
           id="terminal"
-          index="03"
+          index="02"
           eyebrow="The concept"
           title="Introducing the Small Regional Food Terminal"
-          tone="band"
           intro={<>
             <p>A Small Regional Food Terminal (SRFT) is our proposed concept for a modular physical facility that connects regional food production with regional consumption. Each terminal could support six core functions: <strong className="text-[#3F3228]">aggregate, store, distribute, sell, grow and process.</strong></p>
             <p>The terminal is not intended to replace independent farms. It is intended to provide the shared infrastructure that makes those farms collectively more capable.</p>
@@ -181,9 +134,10 @@ export default function VisionPage() {
         {/* E — Builder */}
         <Section
           id="build"
-          index="04"
+          index="03"
           eyebrow="Build your own food terminal"
           title="Building the terminal"
+          tone="band"
           intro={<>
             <p>Using 40-foot shipping containers as conceptual building blocks, a terminal can start small and grow module by module alongside demand. Producers and customers arrive on separate sides of the site, around a shared public courtyard, with space left for future expansion.</p>
             <p>Add or remove modules to see how footprint, capital, operating costs, capacity and revenue streams change. Shipping container construction is a conceptual design choice, not a requirement of the broader SRFT model.</p>
@@ -201,10 +155,9 @@ export default function VisionPage() {
         {/* F — Market */}
         <Section
           id="market"
-          index="05"
+          index="04"
           eyebrow="Regional market simulator"
           title="The economics of regional food"
-          tone="band"
           intro={<>
             <p>Every household surrounding a regional food terminal already participates in the food economy. The question is how much of that existing demand can be served through regional production and distribution.</p>
             <p>Unlike many businesses, a food terminal does not need to establish demand for an entirely new product category. It needs to earn a share of existing household and commercial food spending.</p>
@@ -222,9 +175,10 @@ export default function VisionPage() {
         {/* G — Operating model */}
         <Section
           id="sustain"
-          index="06"
+          index="05"
           eyebrow="Operating model"
           title="Can a terminal sustain itself?"
+          tone="band"
           intro={<p>This model connects the terminal you configured with the regional market above. Explore how capital investment, market penetration and operating costs together determine whether a terminal could sustain itself. Every assumption is editable.</p>}
         >
           <div className="mb-6 space-y-4">
@@ -237,10 +191,9 @@ export default function VisionPage() {
         {/* H — Network */}
         <Section
           id="network"
-          index="07"
+          index="06"
           eyebrow="Scale the network, not the facility"
           title="A replicable unit of regional food infrastructure"
-          tone="band"
           intro={<>
             <p>The objective is not to build increasingly enormous food distribution centres, nor to scatter many small ones across a single county. It is to develop a replicable unit of regional food infrastructure: one terminal per agricultural region, sized to that region’s demand, adapted to local conditions and interconnected with neighbouring regions.</p>
             <p>Prince Edward County would have one terminal: the pilot. Its job is to test the model in the open, so that other communities can decide whether, and how, to build their own.</p>
@@ -255,9 +208,10 @@ export default function VisionPage() {
       {/* I — Roadmap */}
       <Section
         id="pec"
-        index="08"
+        index="07"
         eyebrow="Where it begins"
         title="Starting in Prince Edward County"
+        tone="band"
         intro={<>
           <p>County Farm Collective already connects independent local producers with households and restaurants through a shared digital marketplace.</p>
           <p>Our demand-driven ordering model allows producers to prepare food against actual customer orders, helping limit unnecessary inventory.</p>
