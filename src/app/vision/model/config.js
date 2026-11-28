@@ -383,7 +383,7 @@ export const PARAMS = {
   newHouseholds: { group: 'market', label: 'New households nearby', kind: 'count', min: 0, max: 7500, step: 50, default: 0, help: 'Homes in planned developments, such as the residential phases proposed at Base31. Each one adds recurring weekly demand.' },
   weeklySpend: { group: 'market', label: 'Weekly household food spending', kind: 'cad', min: 100, max: 400, step: 5, default: 230, help: 'Groceries and food purchased for home, per household per week.' },
   addressablePct: { group: 'market', label: 'Addressable by regional producers', kind: 'pct', min: 0.05, max: 1, step: 0.01, default: 0.3, term: 'addressable', help: 'Share of food spending regional producers could plausibly supply.' },
-  capturePct: { group: 'market', label: 'Market capture', kind: 'pct', min: 0, max: 0.3, step: 0.0025, default: 0.04, term: 'capture', help: 'Share of the addressable market the terminal earns. Never more than the addressable market.' },
+  householdOrdersWeekly: { group: 'market', label: 'Household orders per week', kind: 'count', min: 0, max: 2000, step: 5, default: 430, term: 'householdOrders', help: 'Online and walk-in orders from households. Set it from CFC’s recent weekly average, then explore growth from there.' },
   aov: { group: 'market', label: 'Average order value', kind: 'cad', min: 30, max: 200, step: 5, default: 75, term: 'aov' },
   consignmentPct: { group: 'market', label: 'Consignment rate', kind: 'pct', min: 0, max: 0.5, step: 0.01, default: 0.2, term: 'consignment', help: 'Share of each sale the terminal keeps. Producers consign their products and receive the rest when they sell, online or walk-in.' },
   retailMixPct: { group: 'market', label: 'Retail share of sales', kind: 'pct', min: 0, max: 0.8, step: 0.05, default: 0.3, help: 'Walk-in retail sales, the rest through the online marketplace. Needs a retail module.' },
@@ -476,7 +476,7 @@ export const SCENARIOS = [
     modules: { receiving: 0, fulfillment: 1, cold: 0, frozen: 0, dry: 0, combined: 1, retail: 0, hydroponic: 0, staff: 0 },
     overrides: {
       tenure: 'building', leaseMonthly: 1500, leaseholdPrep: 0, sharedInfrastructure: 12000, profFeesPct: 0.05,
-      capturePct: 0.006, siteBaseEnergyMonthly: 150, insuranceBaseMonthly: 250,
+      householdOrdersWeekly: 65, siteBaseEnergyMonthly: 150, insuranceBaseMonthly: 250,
       restaurantAccounts: 4, grocerAccounts: 1, minSiteSqft: 0,
     },
   },
@@ -484,7 +484,7 @@ export const SCENARIOS = [
     id: 'conservative', label: 'Conservative',
     blurb: 'A smaller first build, slow uptake, thinner margins, higher contingency.',
     modules: { fulfillment: 1, cold: 1, hydroponic: 0 },
-    overrides: { capturePct: 0.02, weeklySpend: 210, addressablePct: 0.25, aov: 65, storageOccupancy: 0.5, restaurantAccounts: 5, grocerAccounts: 1, contingencyPct: 0.2 },
+    overrides: { householdOrdersWeekly: 190, weeklySpend: 210, addressablePct: 0.25, aov: 65, storageOccupancy: 0.5, restaurantAccounts: 5, grocerAccounts: 1, contingencyPct: 0.2 },
   },
   { id: 'base', label: 'Base', blurb: 'The default illustrative terminal and assumptions.', modules: {}, overrides: {} },
   {
@@ -492,7 +492,7 @@ export const SCENARIOS = [
     blurb: 'A larger terminal sized to stronger uptake and healthy commercial demand.',
     // The smallest build that clears every capacity flag at this demand.
     modules: { fulfillment: 3, cold: 3, frozen: 2, dry: 2, combined: 1, retail: 2, kitchen: 1 },
-    overrides: { capturePct: 0.07, weeklySpend: 250, addressablePct: 0.35, aov: 85, storageOccupancy: 0.85, restaurantAccounts: 15, restaurantWeekly: 350, grocerAccounts: 4, institutionAccounts: 1, contingencyPct: 0.1 },
+    overrides: { householdOrdersWeekly: 840, weeklySpend: 250, addressablePct: 0.35, aov: 85, storageOccupancy: 0.85, restaurantAccounts: 15, restaurantWeekly: 350, grocerAccounts: 4, institutionAccounts: 1, contingencyPct: 0.1 },
   },
 ]
 
@@ -517,7 +517,8 @@ export const MAX_TERMINALS = 9
 export const GLOSSARY = {
   gmv: { term: 'Gross merchandise value (GMV)', def: 'The total value of food sold through the terminal, before producers are paid. It is not the terminal’s revenue.' },
   addressable: { term: 'Addressable market', def: 'The part of regional food spending that regional producers could realistically supply: fresh produce, meat, dairy, eggs, baked goods and preserves, but not bananas or coffee beans.' },
-  capture: { term: 'Market capture', def: 'The share of the addressable market the terminal actually earns. It can never exceed the addressable market itself.' },
+  capture: { term: 'Market capture', def: 'Household sales as a share of the addressable market. It is a result of the weekly orders, not an input, and a useful check: it can never exceed 100%.' },
+  householdOrders: { term: 'Household orders per week', def: 'Orders from households, online or walk-in, each worth the average order value. Unlike a share of the market, this can be checked against CFC’s own order history. Shown alongside as a share of households and of the addressable market.' },
   aov: { term: 'Average order value', def: 'The average amount a customer spends per order. Used to turn sales into an equivalent number of weekly orders.' },
   consignment: { term: 'Consignment', def: 'Producers place their products with the terminal and keep ownership until they sell. When an item sells, online or in the market, the terminal keeps the consignment rate and pays the producer the rest. There are no marketplace fees and no wholesale buying of stock.' },
   retained: { term: 'Retained revenue', def: 'The money the terminal keeps after producers are paid: its consignment share of online and walk-in sales, the wholesale margin and the full value of food it grows itself.' },
@@ -525,7 +526,7 @@ export const GLOSSARY = {
   capex: { term: 'Capital to provide', def: 'One-time cost to set up the facilities: site, containers, equipment, fees and contingency. The approach assumed here is that partners provide the facilities and CFC leases them, so this is what partners or funders would need to put in, not CFC debt.' },
   opex: { term: 'Operating costs', def: 'Recurring monthly costs of running the terminal: staff, rent, utilities, insurance, delivery, software and losses.' },
   surplus: { term: 'Operating surplus', def: 'Monthly income minus monthly operating costs, including the facility lease. Negative means a deficit.' },
-  breakEven: { term: 'Break-even sales volume', def: 'The annual household sales at which income covers operating costs, holding the sales mix and every other assumption constant. Found by searching the model, so it accounts for variable costs and fixed overhead.' },
+  breakEven: { term: 'Break-even sales volume', def: 'The weekly household orders, and the annual sales they bring, at which income covers operating costs, holding the sales mix and every other assumption constant. Found by searching the model, so it accounts for variable costs and fixed overhead.' },
   contingency: { term: 'Contingency', def: 'An allowance for costs that are unknown at the concept stage, applied as a share of construction costs.' },
   throughput: { term: 'Throughput', def: 'The value of product a module can comfortably handle each week.' },
 }

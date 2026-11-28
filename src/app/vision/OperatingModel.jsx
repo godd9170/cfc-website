@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import LineChart from './LineChart'
 import CostBreakdown from './CostBreakdown'
-import { computeModel, sweepCapture } from './model/calc.js'
+import { computeModel, sweepOrders } from './model/calc.js'
 import { CAPEX_CATEGORIES, PARAMS, PARAM_GROUPS, SCENARIOS, STREAMS, scenarioAssumptions, scenarioModules } from './model/config.js'
 import { fmtCad, fmtCadCompact, fmtNum, fmtPct } from './model/format.js'
 import { useVision } from './state'
@@ -38,7 +38,7 @@ function Breakdown({ title, term, rows, total, totalLabel, note }) {
 
 function BreakEvenText({ be, model }) {
   if (!be) return 'Not reached within the addressable market'
-  return `${fmtCadCompact(be.annualSales)}/yr · ${fmtPct(be.capture, 1)} capture · ~${fmtNum(be.weeklyOrders)} orders/wk${be.annualSales <= model.annualSales ? ' (reached)' : ''}`
+  return `~${fmtNum(be.weeklyOrders)} household orders/wk · ${fmtCadCompact(be.annualSales)}/yr · ${fmtPct(be.capture, 1)} of addressable${be.weeklyOrders <= model.weeklyOrders ? ' (reached)' : ''}`
 }
 
 function Comparison({ state }) {
@@ -50,14 +50,14 @@ function Comparison({ state }) {
 
   const rows = [
     ['Terminal size', m => `${fmtNum(m.capex.containers)} containers · ${fmtNum(m.capex.buildingSqft)} sq ft`],
-    ['Market capture', m => fmtPct(m.capture, 1)],
+    ['Household orders per week', m => `${fmtNum(m.weeklyOrders)} (${fmtPct(m.capture, 1)} of addressable)`],
     ['Annual terminal sales (GMV)', m => fmtCadCompact(m.annualSales)],
     ['Annual producer payouts', m => fmtCadCompact(m.producerPayouts)],
     ['Monthly income', m => fmtCad(m.tradingIncome + m.serviceIncome)],
     ['Monthly operating costs', m => fmtCad(m.operatingCosts)],
     ['Monthly operating surplus', m => fmtCad(m.surplus), m => (m.surplus >= 0 ? 'text-[#2F5D50]' : 'text-brand-primary-dark')],
     ['Capital to provide (partners)', m => fmtCadCompact(m.capex.total)],
-    ['Break-even capture', m => (m.breakEven ? fmtPct(m.breakEven.capture, 1) : 'Not reached')],
+    ['Break-even orders per week', m => (m.breakEven ? fmtNum(m.breakEven.weeklyOrders) : 'Not reached')],
   ]
 
   return (
@@ -89,11 +89,11 @@ export default function OperatingModel() {
   const { state, model } = useVision()
   const { capex, income } = model
 
-  const xMax = Math.min(1, Math.ceil(Math.max(0.3, (model.breakEven?.capture ?? 0) * 1.3) * 20) / 20)
-  const sweep = useMemo(() => sweepCapture(state.a, state.modules, xMax, 60), [state.a, state.modules, xMax])
-  const data = sweep.map(p => ({ x: p.capture, income: p.tradingIncome + p.serviceIncome, costs: p.operatingCosts }))
-  const markers = [{ x: model.capture, label: `Current ${fmtPct(model.capture, 1)}` }]
-  if (model.breakEven && model.breakEven.capture > 0) markers.push({ x: model.breakEven.capture, label: 'Break-even', color: '#2F5D50', row: 1 })
+  const xMax = Math.ceil(Math.max(1000, model.weeklyOrders * 1.3, (model.breakEven?.weeklyOrders ?? 0) * 1.3) / 100) * 100
+  const sweep = useMemo(() => sweepOrders(state.a, state.modules, xMax, 60), [state.a, state.modules, xMax])
+  const data = sweep.map(p => ({ x: p.orders, income: p.tradingIncome + p.serviceIncome, costs: p.operatingCosts }))
+  const markers = [{ x: model.weeklyOrders, label: `Current ${fmtNum(model.weeklyOrders)}/wk` }]
+  if (model.breakEven && model.breakEven.weeklyOrders > 0) markers.push({ x: model.breakEven.weeklyOrders, label: 'Break-even', color: '#2F5D50', row: 1 })
 
   const surplusTone = model.surplus >= 0 ? 'good' : 'bad'
 
@@ -115,10 +115,10 @@ export default function OperatingModel() {
 
         <div className="space-y-4">
           <div className="rounded-3xl border border-[#e2d8ca] bg-[#fffdf8] p-5">
-            <ParamSlider k="capturePct" />
+            <ParamSlider k="householdOrdersWeekly" />
           </div>
           <div className="rounded-3xl border border-[#e2d8ca] bg-[#fffdf8] p-5">
-            <h3 className="mb-1 text-sm font-bold uppercase tracking-[0.12em] text-[#8a7b69]" style={{ fontFamily: 'inherit' }}>Monthly income vs costs as capture grows</h3>
+            <h3 className="mb-1 text-sm font-bold uppercase tracking-[0.12em] text-[#8a7b69]" style={{ fontFamily: 'inherit' }}>Monthly income vs costs as weekly orders grow</h3>
             <p className="mb-3 text-xs text-[#8a7b69]">The terminal sustains itself where the income line crosses above the cost line.</p>
             <LineChart
               data={data}
@@ -126,11 +126,11 @@ export default function OperatingModel() {
                 { key: 'income', label: 'Monthly income', color: '#2F5D50' },
                 { key: 'costs', label: 'Operating costs', color: '#c8513b' },
               ]}
-              xFormat={x => fmtPct(x, x < 0.1 && x !== 0 ? 1 : 0)}
+              xFormat={x => fmtNum(x)}
               yFormat={(y, full) => (full ? fmtCad(y) : fmtCadCompact(y))}
-              xLabel="Market capture"
+              xLabel="Household orders per week"
               markers={markers}
-              ariaLabel={`Monthly income and operating costs as market capture rises to ${fmtPct(xMax)}. ${model.breakEven ? `Income covers operating costs from about ${fmtPct(model.breakEven.capture, 1)} capture.` : 'Income does not cover operating costs within this range.'}`}
+              ariaLabel={`Monthly income and operating costs as household orders rise to ${fmtNum(xMax)} a week. ${model.breakEven ? `Income covers operating costs from about ${fmtNum(model.breakEven.weeklyOrders)} household orders a week.` : 'Income does not cover operating costs within this range.'}`}
             />
           </div>
         </div>
@@ -186,10 +186,10 @@ export default function OperatingModel() {
       <div className="rounded-2xl border border-[#e2d8ca] bg-[#f3ecdf] p-5 text-xs leading-5 text-[#5f5244]">
         <p className="font-semibold text-[#3F3228]">How these figures are calculated</p>
         <ul className="mt-2 list-disc space-y-1 pl-4">
-          <li>Households = population ÷ household size. Regional spending = households × weekly spending × 52. Terminal sales = regional spending × addressable share × capture.</li>
+          <li>Households = population ÷ household size. Regional spending = households × weekly spending × 52. Household sales = household orders per week × average order value × 52. Capture = household sales ÷ (regional spending × addressable share), shown as a check, never above 100%.</li>
           <li>CFC sells on consignment: producers own their products until they sell, and the terminal keeps the consignment rate on every online and walk-in sale. There are no marketplace fees. Producer payouts are sales minus what the terminal retains.</li>
           <li>On-site growing is sold through the retail market. The terminal keeps the share it would otherwise pay producers, not extra sales, so it is never double-counted. Output beyond retail sales is excluded.</li>
-          <li>Break-even holds the sales mix and every other assumption fixed, then searches for the capture at which income covers fixed and variable costs. It ignores capacity limits.</li>
+          <li>Break-even holds the sales mix and every other assumption fixed, then searches for the weekly household orders at which income covers fixed and variable costs. It ignores capacity limits.</li>
           <li><strong>Facilities:</strong> the facilities are assumed to be provided by partners and leased to CFC. The capital figure is what partners or funders would need to put in; CFC’s cost is the monthly facility lease, so no loan repayments or capital payback are modelled. <strong>Tax:</strong> all figures are pre-tax; income tax, HST, depreciation and inflation are not modelled.</li>
           <li>Every figure is an illustrative assumption in CAD, not CFC financial data or a verified construction quotation.</li>
         </ul>

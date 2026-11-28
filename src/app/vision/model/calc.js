@@ -70,9 +70,12 @@ export function computeCore(a, modules, capex = computeCapex(a, modules), capaci
   const households = a.population / a.householdSize + (a.newHouseholds || 0)
   const regionalSpend = households * a.weeklySpend * WEEKS
   const addressable = regionalSpend * clamp(a.addressablePct, 0, 1)
-  const capture = clamp(a.capturePct, 0, 1) // capture can never exceed the addressable market
-  const annualSales = addressable * capture // household GMV
-  const weeklyOrders = a.aov > 0 ? annualSales / WEEKS / a.aov : 0
+  // Household sales are driven by weekly orders, which CFC can check against
+  // its own order history. Capture is derived from them.
+  const weeklyOrders = Math.max(0, a.householdOrdersWeekly)
+  const annualSales = weeklyOrders * a.aov * WEEKS // household GMV
+  const capture = addressable > 0 ? annualSales / addressable : 0
+  const householdReach = households > 0 ? weeklyOrders / households : 0 // orders a week per household
 
   // Sales mix: retail needs a retail module.
   const hasRetail = count(modules, 'retail') > 0
@@ -188,21 +191,29 @@ export function computeCore(a, modules, capex = computeCapex(a, modules), capaci
   const surplus = tradingIncome + serviceIncome - operatingCosts
 
   return {
-    households, regionalSpend, addressable, capture, annualSales, weeklyOrders,
+    households, regionalSpend, addressable, capture, householdReach, annualSales, weeklyOrders,
     hasRetail, retailSales, marketplaceSales, marketplaceOrdersWeekly, effectiveCommission,
     grownSold, retainedTrading, householdPayouts, producerPayouts, wholesaleGmv, wholesaleIncome, wholesaleOrdersWeekly, totalGmv, totalRetained, fulfillmentOrdersWeekly, segments,
     services, income, tradingIncome, serviceIncome, costs, costParts, operatingCosts, surplus,
   }
 }
 
-// Smallest capture at which `pick(core) >= 0`, by bisection. The model is
-// monotonic in capture as long as each extra dollar of sales contributes more
-// than it costs, so a negative value at 100% capture means "not reachable".
-function solveCapture(a, modules, capex, capacity, pick) {
-  const at = c => pick(computeCore({ ...a, capturePct: c }, modules, capex, capacity))
+// Orders a week that would buy the whole addressable market.
+export function maxOrdersWeekly(a) {
+  const households = a.population / a.householdSize + (a.newHouseholds || 0)
+  return a.aov > 0 ? (households * a.weeklySpend * clamp(a.addressablePct, 0, 1)) / a.aov : 0
+}
+
+// Fewest weekly household orders at which `pick(core) >= 0`, by bisection.
+// The model is monotonic in orders as long as each extra sale contributes
+// more than it costs, so a negative value at the whole addressable market
+// means "not reachable".
+function solveOrders(a, modules, capex, capacity, pick) {
+  const at = n => pick(computeCore({ ...a, householdOrdersWeekly: n }, modules, capex, capacity))
+  const max = maxOrdersWeekly(a)
   if (at(0) >= 0) return 0
-  if (at(1) < 0) return null
-  let lo = 0, hi = 1
+  if (at(max) < 0) return null
+  let lo = 0, hi = max
   for (let i = 0; i < 40; i++) {
     const mid = (lo + hi) / 2
     if (at(mid) >= 0) hi = mid
@@ -212,10 +223,10 @@ function solveCapture(a, modules, capex, capacity, pick) {
 }
 
 function breakEvenAt(a, modules, capex, capacity, pick) {
-  const capture = solveCapture(a, modules, capex, capacity, pick)
-  if (capture == null) return null
-  const core = computeCore({ ...a, capturePct: capture }, modules, capex, capacity)
-  return { capture, annualSales: core.annualSales, weeklyOrders: core.weeklyOrders }
+  const orders = solveOrders(a, modules, capex, capacity, pick)
+  if (orders == null) return null
+  const core = computeCore({ ...a, householdOrdersWeekly: orders }, modules, capex, capacity)
+  return { capture: core.capture, annualSales: core.annualSales, weeklyOrders: orders }
 }
 
 // ── Full model ──────────────────────────────────────────────────────────────
@@ -228,7 +239,7 @@ export function computeModel(a, modules) {
   const breakEven = breakEvenAt(a, modules, capex, capacity, c => c.surplus)
 
   const flags = computeFlags(a, modules, core, capacity)
-  if (breakEven && breakEven.capture > core.capture && breakEven.weeklyOrders * (1 - (core.hasRetail ? a.retailMixPct : 0)) + core.wholesaleOrdersWeekly > capacity.ordersPerWeek) {
+  if (breakEven && breakEven.weeklyOrders > core.weeklyOrders && breakEven.weeklyOrders * (1 - (core.hasRetail ? a.retailMixPct : 0)) + core.wholesaleOrdersWeekly > capacity.ordersPerWeek) {
     flags.push({ level: 'warn', text: `Break-even needs about ${Math.round(breakEven.weeklyOrders).toLocaleString('en-CA')} orders a week, more than this configuration can fulfill. It would need to grow before it could sustain itself.` })
   }
   return { ...core, capex, capacity, breakEven, flags }
@@ -242,6 +253,9 @@ export function computeFlags(a, modules, core, capacity) {
   const r = n => Math.round(n).toLocaleString('en-CA')
   const $ = n => `$${r(n)}`
 
+  if (core.capture > 1) {
+    warn(`${r(core.weeklyOrders)} household orders a week would be more than the whole addressable market (${Math.round(core.capture * 100)}%). Lower the orders or raise the addressable share.`)
+  }
   if (core.fulfillmentOrdersWeekly > capacity.ordersPerWeek) {
     warn(`Forecast orders (${r(core.marketplaceOrdersWeekly)} online + ${r(core.wholesaleOrdersWeekly)} wholesale a week) exceed fulfillment capacity (${r(capacity.ordersPerWeek)}/week). Add a fulfillment module.`)
   }
@@ -279,12 +293,12 @@ export function computeFlags(a, modules, core, capacity) {
 
 // ── Helpers for charts, scenario comparison and the network ─────────────────
 
-export function sweepCapture(a, modules, maxCapture, steps = 60) {
+export function sweepOrders(a, modules, maxOrders, steps = 60) {
   const capex = computeCapex(a, modules)
   const capacity = computeCapacity(a, modules)
   return Array.from({ length: steps + 1 }, (_, i) => {
-    const capture = (maxCapture * i) / steps
-    return { capture, ...computeCore({ ...a, capturePct: capture }, modules, capex, capacity) }
+    const orders = (maxOrders * i) / steps
+    return { orders, ...computeCore({ ...a, householdOrdersWeekly: orders }, modules, capex, capacity) }
   })
 }
 
@@ -300,8 +314,11 @@ export function computeNetwork(a, modules, terminals) {
     const baseA = stage === 'current' ? a : scenarioAssumptions(stage)
     const mods = stage === 'current' ? modules : scenarioModules(stage)
     const population = terminalPopulation(t, a)
-    // Planned new households apply to the PEC pilot only.
-    const m = computeModel({ ...baseA, population, newHouseholds: t.archetype === 'pec' ? a.newHouseholds : 0 }, mods)
+    // Planned new households apply to the PEC pilot only. Other regions scale
+    // weekly orders by population: the same share of households ordering.
+    const pec = t.archetype === 'pec'
+    const householdOrdersWeekly = pec ? baseA.householdOrdersWeekly : baseA.householdOrdersWeekly * (population / a.population)
+    const m = computeModel({ ...baseA, population, householdOrdersWeekly, newHouseholds: pec ? a.newHouseholds : 0 }, mods)
     return { ...t, stage, population, regionalSpend: m.regionalSpend, annualSales: m.annualSales, capex: m.capex.total, surplus: m.surplus }
   })
   return {

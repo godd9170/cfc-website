@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import LineChart from './LineChart'
-import { sweepCapture } from './model/calc.js'
+import { sweepOrders } from './model/calc.js'
 import { PARAMS } from './model/config.js'
 import { fmtCad, fmtCadCompact, fmtNum, fmtPct } from './model/format.js'
 import { useVision } from './state'
@@ -65,9 +65,9 @@ function SplitBar({ model }) {
 
 export default function MarketSimulator() {
   const { state, dispatch, model } = useVision()
-  const maxCapture = PARAMS.capturePct.max
-  const sweep = useMemo(() => sweepCapture(state.a, state.modules, maxCapture, 60), [state.a, state.modules, maxCapture])
-  const data = sweep.map(p => ({ x: p.capture, gmv: p.totalGmv, payouts: p.producerPayouts, retained: p.totalRetained }))
+  const maxOrders = PARAMS.householdOrdersWeekly.max
+  const sweep = useMemo(() => sweepOrders(state.a, state.modules, maxOrders, 60), [state.a, state.modules, maxOrders])
+  const data = sweep.map(p => ({ x: p.orders, gmv: p.totalGmv, payouts: p.producerPayouts, retained: p.totalRetained }))
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]">
@@ -84,9 +84,9 @@ export default function MarketSimulator() {
       <div className="space-y-5">
         <dl className="grid grid-cols-2 gap-3 xl:grid-cols-3" aria-live="polite">
           <Stat label="Regional food spending" value={fmtCadCompact(model.regionalSpend)} sub={`${fmtNum(model.households)} households${state.a.newHouseholds ? ` (incl. ${fmtNum(state.a.newHouseholds)} new)` : ''} × ${fmtCad(state.a.weeklySpend)}/wk × 52`} />
-          <Stat label="Addressable market" term="addressable" value={fmtCadCompact(model.addressable)} sub={`${fmtPct(state.a.addressablePct)} of spending`} />
-          <Stat label="Annual terminal sales" term="gmv" value={fmtCadCompact(model.totalGmv)} sub={`Households ${fmtCadCompact(model.annualSales)} (${fmtPct(model.capture, 1)} capture) + wholesale ${fmtCadCompact(model.wholesaleGmv)}`} tone="good" />
-          <Stat label="Weekly orders (equivalent)" term="aov" value={fmtNum(model.weeklyOrders + model.wholesaleOrdersWeekly)} sub={`${fmtNum(model.weeklyOrders)} household at ${fmtCad(state.a.aov)} + ${fmtNum(model.wholesaleOrdersWeekly)} wholesale`} />
+          <Stat label="Addressable market" term="addressable" value={fmtCadCompact(model.addressable)} sub={`${fmtPct(state.a.addressablePct)} of spending · the terminal serves ${fmtPct(model.capture, 1)} of it`} />
+          <Stat label="Annual terminal sales" term="gmv" value={fmtCadCompact(model.totalGmv)} sub={`Households ${fmtCadCompact(model.annualSales)} (${fmtNum(model.weeklyOrders)}/wk × ${fmtCad(state.a.aov)}) + wholesale ${fmtCadCompact(model.wholesaleGmv)}`} tone="good" />
+          <Stat label="Weekly orders" term="householdOrders" value={fmtNum(model.weeklyOrders + model.wholesaleOrdersWeekly)} sub={`${fmtNum(model.weeklyOrders)} household (≈ ${fmtPct(model.householdReach, 1)} of ${fmtNum(model.households)} households each week) + ${fmtNum(model.wholesaleOrdersWeekly)} wholesale`} />
           <Stat label="Annual producer payouts" term="payouts" value={fmtCadCompact(model.producerPayouts)} sub="Retail and wholesale" />
           <Stat label="Terminal retained revenue" term="retained" value={fmtCadCompact(model.totalRetained)} sub={`Consignment rate ${fmtPct(model.effectiveCommission, 0)}`} />
         </dl>
@@ -106,7 +106,7 @@ export default function MarketSimulator() {
         </div>
 
         <div className="rounded-3xl border border-[#e2d8ca] bg-[#fffdf8] p-5">
-          <h3 className="mb-1 text-sm font-bold uppercase tracking-[0.12em] text-[#8a7b69]" style={{ fontFamily: 'inherit' }}>As market capture increases</h3>
+          <h3 className="mb-1 text-sm font-bold uppercase tracking-[0.12em] text-[#8a7b69]" style={{ fontFamily: 'inherit' }}>As weekly orders grow</h3>
           <p className="mb-3 text-xs text-[#8a7b69]">Annual values, including wholesale at its current level. Drag across the chart to read them.</p>
           <LineChart
             data={data}
@@ -115,11 +115,11 @@ export default function MarketSimulator() {
               { key: 'payouts', label: 'Producer payouts', color: '#2F5D50' },
               { key: 'retained', label: 'Retained revenue', color: '#e8b04a' },
             ]}
-            xFormat={x => fmtPct(x, x < 0.1 && x !== 0 ? 1 : 0)}
+            xFormat={x => fmtNum(x)}
             yFormat={(y, full) => (full ? fmtCad(y) : fmtCadCompact(y))}
-            xLabel="Market capture (share of addressable market)"
-            markers={[{ x: model.capture, label: `Current ${fmtPct(model.capture, 1)}` }]}
-            ariaLabel={`Line chart of annual terminal sales, producer payouts and retained revenue as market capture rises from 0 to ${fmtPct(maxCapture)}. At the current ${fmtPct(model.capture, 1)}: sales ${fmtCad(model.totalGmv)}, payouts ${fmtCad(model.producerPayouts)}, retained ${fmtCad(model.totalRetained)}.`}
+            xLabel="Household orders per week"
+            markers={[{ x: model.weeklyOrders, label: `Current ${fmtNum(model.weeklyOrders)}/wk` }]}
+            ariaLabel={`Line chart of annual terminal sales, producer payouts and retained revenue as household orders rise from 0 to ${fmtNum(maxOrders)} a week. At the current ${fmtNum(model.weeklyOrders)} a week: sales ${fmtCad(model.totalGmv)}, payouts ${fmtCad(model.producerPayouts)}, retained ${fmtCad(model.totalRetained)}.`}
           />
         </div>
       </div>
