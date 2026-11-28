@@ -1,0 +1,91 @@
+/* Styles scoped to /vision. Everything animated here is disabled under
+   prefers-reduced-motion. */
+
+.vision-blueprint {
+  background-color: #fbf7ef;
+  background-image:
+    linear-gradient(rgba(200, 188, 169, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 188, 169, 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.vision-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #c8513b var(--fill, 0%), #e2d8ca var(--fill, 0%));
+  cursor: pointer;
+}
+.vision-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fffdf8;
+  border: 2px solid #c8513b;
+  box-shadow: 0 1px 3px rgba(63, 50, 40, 0.25);
+}
+.vision-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fffdf8;
+  border: 2px solid #c8513b;
+  box-shadow: 0 1px 3px rgba(63, 50, 40, 0.25);
+}
+.vision-range:focus-visible {
+  outline: 2px solid #c8513b;
+  outline-offset: 6px;
+}
+
+.vision-zone:focus {
+  outline: none;
+}
+.vision-zone:focus-visible,
+.vision-zone:hover {
+  filter: drop-shadow(0 0 5px rgba(200, 81, 59, 0.75));
+}
+
+@keyframes vision-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: none; }
+}
+.vision-pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: vision-pop 0.35s ease-out;
+}
+
+@keyframes vision-dash {
+  to { stroke-dashoffset: -24; }
+}
+.vision-flow {
+  animation: vision-dash 1.2s linear infinite;
+}
+
+@keyframes vision-glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+.vision-sun {
+  animation: vision-glow 5s ease-in-out infinite alternate;
+}
+
+@keyframes vision-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.vision-rise {
+  animation: vision-rise 0.8s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vision-pop,
+  .vision-flow,
+  .vision-sun,
+  .vision-rise {
+    animation: none;
+  }
+}
