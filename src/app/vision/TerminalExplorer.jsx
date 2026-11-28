@@ -8,7 +8,7 @@ import { useVision } from './state'
 import { Term } from './ui'
 
 const capexOf = m => Object.values(m.capex).reduce((s, v) => s + v, 0)
-const monthlyOf = (m, a) => (a[`staff_${m.id}`] ?? 0) * a.wageHourly * (52 / 12) + m.monthly.energy + m.monthly.water
+const monthlyOf = (m, a) => (a[`staff_${m.id}`] ?? 0) * a.wageHourly * (52 / 12) + m.monthly.energy
 
 export function capacityText(m, a) {
   const c = m.capacity

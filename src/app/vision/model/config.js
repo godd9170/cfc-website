@@ -35,7 +35,7 @@ export const CAPEX_CATEGORIES = [
 
 // ── Modules (Section E) ─────────────────────────────────────────────────────
 // capex: one-time cost per unit, by category.
-// monthly: fixed monthly energy and water per unit.
+// monthly: fixed monthly energy per unit.
 // staffHours: paid staff hours per week per unit (editable on the page).
 // capacity: what one unit adds. Throughputs are $ of product per week.
 // lean: capex per unit when set up inside an existing leased building with
@@ -79,7 +79,7 @@ export const MODULES = [
     description: 'A covered dock where producers drop off pre-ordered product to be checked in, weighed and labelled.',
     capex: { containers: BOX, structural: 22000, electricalPlumbing: 8000 }, // roll-up door with framing, insulation, heat, ramp
     lean: { structural: 3000 }, // scale, tables and a marked drop-off bay
-    staffHours: 3, monthly: { energy: 200, water: 0 },
+    staffHours: 3, monthly: { energy: 200 },
     capacity: {},
     streams: [],
     layout: { L: 40, W: 8, items: [
@@ -97,7 +97,7 @@ export const MODULES = [
     description: 'Packing stations and staging racks where each household or restaurant order is assembled from many producers.',
     capex: { containers: BOX, structural: 28000, electricalPlumbing: 9000 }, // food-grade washable interior, heat, racking, packing tables
     lean: { structural: 6000, electricalPlumbing: 1500 }, // racking and packing stations on the building floor
-    monthly: { energy: 250, water: 0 },
+    monthly: { energy: 250 },
     capacity: { ordersPerWeek: 250 },
     streams: ['marketplace', 'wholesale'],
     layout: { L: 40, W: 8, items: [
@@ -114,7 +114,7 @@ export const MODULES = [
     description: 'Shared walk-in cooling for produce, dairy and meat, held at 1–4 °C.',
     capex: { containers: BOX, structural: 18000, refrigeration: 16000, electricalPlumbing: 7000 }, // insulated panel liner, cooler door, condensing unit
     lean: { containers: REEFER, refrigeration: 2500, electricalPlumbing: 3000 }, // used working reefer, serviced
-    monthly: { energy: 550, water: 0 },
+    monthly: { energy: 550 },
     capacity: { coldWeekly: 14000, coldPallets: 16 },
     streams: ['storage'],
     layout: { L: 40, W: 8, items: [
@@ -131,7 +131,7 @@ export const MODULES = [
     description: 'Shared −18 °C storage for meat, prepared foods and preserved harvest.',
     capex: { containers: BOX, structural: 22000, refrigeration: 22000, electricalPlumbing: 8000 }, // thicker panels, heated door frame, low-temp unit
     lean: { containers: REEFER, refrigeration: 3000, electricalPlumbing: 3000 }, // used reefer set to −18 °C
-    monthly: { energy: 850, water: 0 },
+    monthly: { energy: 850 },
     capacity: { frozenWeekly: 6000, frozenPallets: 14 },
     streams: ['storage'],
     layout: { L: 40, W: 8, items: [
@@ -148,7 +148,7 @@ export const MODULES = [
     description: 'Racked, pest-proof storage for grains, flour, preserves, coffee and packaging.',
     capex: { containers: BOX, structural: 10000, electricalPlumbing: 3000 }, // insulation against freezing and condensation, racking, vents
     lean: { containers: SHELL + 1500, structural: 2500 }, // used dry container with shelving
-    monthly: { energy: 120, water: 0 },
+    monthly: { energy: 120 },
     capacity: { dryWeekly: 15000, dryPallets: 20 },
     streams: ['storage'],
     layout: { L: 40, W: 8, items: [
@@ -166,7 +166,7 @@ export const MODULES = [
     description: 'One insulated container partitioned into a frozen compartment, a chilled compartment and an unrefrigerated dry end. A low-cost way to start, with less capacity than separate units.',
     capex: { containers: BOX, structural: 24000, refrigeration: 28000, electricalPlumbing: 8000 },
     lean: { containers: REEFER, structural: 4000, refrigeration: 10000, electricalPlumbing: 3000 }, // used reefer, bulkheads, second evaporator
-    monthly: { energy: 700, water: 0 },
+    monthly: { energy: 700 },
     capacity: { coldWeekly: 7000, frozenWeekly: 3000, dryWeekly: 6000, coldPallets: 6, frozenPallets: 5, dryPallets: 6 },
     streams: ['storage'],
     layout: { L: 40, W: 8, items: [
@@ -184,7 +184,7 @@ export const MODULES = [
     min: 0, max: 2, default: 1, containers: 2, footprint: CONTAINER_SQFT * 2,
     description: 'A small market hall built from two joined containers, with display coolers, shelving and a checkout.',
     capex: { containers: BOX * 2, structural: 70000, refrigeration: 18000, electricalPlumbing: 22000, retailFitout: 45000 }, // joined boxes, storefront glazing, accessible entry
-    staffHours: 20, monthly: { energy: 700, water: 40 },
+    staffHours: 20, monthly: { energy: 700 },
     capacity: { retailAnnual: 600000 },
     streams: ['retail'],
     layout: { L: 40, W: 16, items: [
@@ -202,7 +202,7 @@ export const MODULES = [
     min: 0, max: 3, default: 1, containers: 1, footprint: CONTAINER_SQFT,
     description: 'A turnkey climate-controlled container farm producing greens and herbs year-round, sold through the retail market.',
     capex: { containers: PLACE, electricalPlumbing: 10000, growing: 205000 }, // turnkey farm (container included), freight, hookups
-    staffHours: 6, monthly: { energy: 1500, water: 80 },
+    staffHours: 6, monthly: { energy: 1500 },
     capacity: { growAnnual: 65000 },
     streams: ['onsite'],
     layout: { L: 40, W: 8, items: [
@@ -218,7 +218,7 @@ export const MODULES = [
     min: 0, max: 1, default: 1, containers: 1, footprint: CONTAINER_SQFT,
     description: 'Accessible washrooms, handwashing, a break room and an office. Needed on a new-build site; an existing building usually has its own.',
     capex: { containers: BOX, structural: 30000, electricalPlumbing: 45000 }, // barrier-free washroom, finishes, water heater, sewer or septic share, HVAC
-    monthly: { energy: 200, water: 120 },
+    monthly: { energy: 200 },
     capacity: {},
     streams: [],
     layout: { L: 40, W: 8, items: [
@@ -235,7 +235,7 @@ export const MODULES = [
     min: 0, max: 2, default: 0, containers: 1, footprint: CONTAINER_SQFT,
     description: 'An inspected kitchen that producers can rent by the hour for preserving, baking and value-added products.',
     capex: { containers: BOX, structural: 35000, electricalPlumbing: 35000, processing: 75000 }, // food-grade finishes, grease interceptor, hood and fire suppression, equipment
-    staffHours: 2, monthly: { energy: 500, water: 150 },
+    staffHours: 2, monthly: { energy: 500 },
     capacity: { kitchenHours: 1 }, // multiplied by the kitchen-hours assumption
     streams: ['processing'],
     layout: { L: 40, W: 8, items: [
@@ -254,7 +254,7 @@ export const MODULES = [
     min: 0, max: 2, default: 0, containers: 0, footprint: 30 * 48,
     description: 'A 30′ × 48′ four-season greenhouse extending the local growing season, sold through the retail market.',
     capex: { structural: 25000, electricalPlumbing: 15000, growing: 70000 },
-    staffHours: 8, monthly: { energy: 1300, water: 120 },
+    staffHours: 8, monthly: { energy: 1300 },
     capacity: { growAnnual: 55000 },
     streams: ['onsite'],
     layout: { L: 48, W: 30, items: [
@@ -277,7 +277,7 @@ export const MODULES = [
     description: 'Shared washing, candling, grading and cold holding, so small flocks can sell graded eggs to stores and restaurants, not only at the farm gate.',
     capex: { containers: BOX, structural: 22000, refrigeration: 12000, electricalPlumbing: 8000, processing: 35000 },
     lean: { structural: 4000, refrigeration: 8000, electricalPlumbing: 3000, processing: 35000 },
-    monthly: { energy: 250, water: 60 },
+    monthly: { energy: 250 },
     capacity: {},
     service: { unit: 'dozen', units: 'dozen', perWeek: 1500, minutesPerUnit: 0.5, volume: 'eggDozensPerWeek', fee: 'eggGradingFee' },
     streams: ['services'],
@@ -297,7 +297,7 @@ export const MODULES = [
     description: 'A stone mill with grain cleaning and sifting, turning regional wheat, rye, spelt and corn into flour, meal and cereal for bakers and households.',
     capex: { containers: BOX, structural: 18000, electricalPlumbing: 9000, processing: 38000 }, // food-grade finish, dust control; mill, cleaner, sifter, bagging
     lean: { structural: 3000, electricalPlumbing: 5000, processing: 38000 },
-    monthly: { energy: 300, water: 0 },
+    monthly: { energy: 300 },
     capacity: {},
     service: { unit: 'kg', units: 'kg', perWeek: 1500, minutesPerUnit: 0.05, volume: 'grainKgPerWeek', fee: 'millingFeePerKg' },
     streams: ['services'],
@@ -318,7 +318,7 @@ export const MODULES = [
     description: 'A refrigerated cutting room where carcasses from licensed abattoirs are cut, packaged and labelled to each producer’s order. Not a slaughter facility.',
     capex: { containers: BOX, structural: 28000, refrigeration: 22000, electricalPlumbing: 15000, processing: 30000 }, // carcass cooler with rail, chilled cutting room
     lean: { structural: 8000, refrigeration: 15000, electricalPlumbing: 8000, processing: 30000 },
-    monthly: { energy: 600, water: 120 },
+    monthly: { energy: 600 },
     capacity: {},
     service: { unit: 'carcass', units: 'carcasses', perWeek: 10, minutesPerUnit: 150, volume: 'carcassesPerWeek', fee: 'butcheryFee' },
     streams: ['services'],
@@ -399,20 +399,23 @@ export const PARAMS = {
   wholesalePackMinutes: { group: 'wholesale', label: 'Packing time per wholesale order', kind: 'minutes', min: 0, max: 60, step: 1, default: 15, help: 'Wholesale orders are larger; each is delivered.' },
 
   // Labour
-  coreStaffHours: { group: 'labour', label: 'Core operations staff', kind: 'count', min: 0, max: 200, step: 1, default: 25, unit: 'hr/wk', help: 'Coordinating producers, orders and customers. 40 hours is one full-time person.' },
+  coreStaffHours: { group: 'labour', label: 'Core operations hours', kind: 'count', min: 0, max: 200, step: 1, default: 10, unit: 'hr/wk', help: 'The standing work that does not grow with each order: scheduling producer drop-offs, keeping the online store and inventory current, answering customers and bookkeeping. Packing, module staff and drivers are counted separately.' },
   wageHourly: { group: 'labour', label: 'Loaded hourly wage', kind: 'cad', min: 15, max: 50, step: 0.5, default: 25, unit: '/hr' },
   packMinutesPerOrder: { group: 'labour', label: 'Packing time per online order', kind: 'minutes', min: 0, max: 30, step: 0.5, default: 6, help: 'Variable labour for each marketplace order.' },
 
   // Delivery
   deliveryShare: { group: 'delivery', label: 'Online orders delivered', kind: 'pct', min: 0, max: 1, step: 0.05, default: 0.5, help: 'The rest are picked up.' },
-  deliveryCost: { group: 'delivery', label: 'Cost per delivery', kind: 'cad', min: 0, max: 40, step: 0.5, default: 11, help: 'Driver time, vehicle and fuel.' },
+  driverHourly: { group: 'delivery', label: 'Driver pay per hour', kind: 'cad', min: 0, max: 40, step: 0.5, default: 18, unit: '/hr', help: 'Contract drivers, paid gig-style for time on route.' },
+  driverKmRate: { group: 'delivery', label: 'Driver pay per km', kind: 'cad', min: 0, max: 1, step: 0.01, default: 0.2, unit: '/km', help: 'Mileage paid to the driver, who uses their own vehicle.' },
+  stopsPerHour: { group: 'delivery', label: 'Stops per driver hour', kind: 'decimal', min: 1, max: 15, step: 0.5, default: 4, help: 'Including driving between stops and back to the terminal. Rural routes are slower.' },
+  kmPerStop: { group: 'delivery', label: 'Route km per stop', kind: 'count', min: 0, max: 50, step: 1, default: 12, unit: 'km', help: 'Total route distance, including the return trip, divided by stops.' },
   deliveryFee: { group: 'delivery', label: 'Delivery fee recovered', kind: 'cad', min: 0, max: 20, step: 0.25, default: 4, help: 'Charged to the customer per delivered order.' },
 
   // Overheads
-  softwareMonthly: { group: 'overheads', label: 'Software', kind: 'cad', min: 0, max: 5000, step: 50, default: 600, unit: '/mo' },
+  softwareMonthly: { group: 'overheads', label: 'Software', kind: 'cad', min: 0, max: 5000, step: 50, default: 100, unit: '/mo' },
   paymentPct: { group: 'overheads', label: 'Payment processing', kind: 'pct', min: 0, max: 0.05, step: 0.001, default: 0.029, help: 'Share of everything sold.' },
   siteBaseEnergyMonthly: { group: 'overheads', label: 'Site electricity & heating (base)', kind: 'cad', min: 0, max: 3000, step: 50, default: 300, unit: '/mo', help: 'Lighting and common areas, on top of each module’s own use.' },
-  siteBaseWaterMonthly: { group: 'overheads', label: 'Site water (base)', kind: 'cad', min: 0, max: 1000, step: 10, default: 60, unit: '/mo' },
+  waterMonthly: { group: 'overheads', label: 'Water & sewer', kind: 'cad', min: 0, max: 2000, step: 10, default: 150, unit: '/mo', help: 'The whole site: washrooms, cleaning, and the kitchen or growing if built.' },
   insuranceBaseMonthly: { group: 'overheads', label: 'Liability insurance', kind: 'cad', min: 0, max: 3000, step: 50, default: 400, unit: '/mo' },
   insurancePctCapex: { group: 'overheads', label: 'Equipment & contents insurance (of capital, per year)', kind: 'pct', min: 0, max: 0.03, step: 0.001, default: 0.004, help: 'Building insurance is usually the facility owner’s under a lease.' },
   maintenancePctCapex: { group: 'overheads', label: 'Day-to-day maintenance (of capital, per year)', kind: 'pct', min: 0, max: 0.05, step: 0.001, default: 0.008, help: 'Major repairs are usually the facility owner’s under a lease.' },
@@ -473,7 +476,7 @@ export const SCENARIOS = [
     modules: { receiving: 0, fulfillment: 1, cold: 0, frozen: 0, dry: 0, combined: 1, retail: 0, hydroponic: 0, staff: 0 },
     overrides: {
       tenure: 'building', leaseMonthly: 1500, leaseholdPrep: 0, sharedInfrastructure: 12000, profFeesPct: 0.05,
-      capturePct: 0.006, coreStaffHours: 15, softwareMonthly: 400, siteBaseEnergyMonthly: 150, insuranceBaseMonthly: 250,
+      capturePct: 0.006, siteBaseEnergyMonthly: 150, insuranceBaseMonthly: 250,
       restaurantAccounts: 4, grocerAccounts: 1, minSiteSqft: 0,
     },
   },

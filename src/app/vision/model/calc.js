@@ -161,16 +161,23 @@ export function computeCore(a, modules, capex = computeCapex(a, modules), capaci
     ordersMonthly,
     wholesaleOrdersMonthly,
     deliveriesMonthly: ordersMonthly * a.deliveryShare,
+    // Contract drivers: paid by the hour on route plus mileage.
+    stopsMonthly: ordersMonthly * a.deliveryShare + wholesaleOrdersMonthly,
     energyModules: sumModules(modules, m => m.monthly.energy),
     paymentFees: (totalGmv * a.paymentPct) / 12,
   }
+  costParts.driverHours = costParts.stopsMonthly / Math.max(1, a.stopsPerHour)
+  costParts.driverTime = costParts.driverHours * a.driverHourly
+  costParts.km = costParts.stopsMonthly * a.kmPerStop
+  costParts.mileage = costParts.km * a.driverKmRate
+  costParts.feesRecovered = costParts.deliveriesMonthly * a.deliveryFee
   const costs = {
     labour: costParts.coreStaff + costParts.moduleStaff + costParts.packing + costParts.serviceStaff,
     rent: a.tenure === 'own' ? 0 : a.leaseMonthly,
     energy: a.siteBaseEnergyMonthly + sumModules(modules, m => m.monthly.energy),
-    water: a.siteBaseWaterMonthly + sumModules(modules, m => m.monthly.water),
+    water: a.waterMonthly,
     insurance: a.insuranceBaseMonthly + (capex.total * a.insurancePctCapex) / 12,
-    delivery: ordersMonthly * a.deliveryShare * (a.deliveryCost - a.deliveryFee) + wholesaleOrdersMonthly * a.deliveryCost,
+    delivery: costParts.driverTime + costParts.mileage - costParts.feesRecovered,
     software: a.softwareMonthly + (totalGmv * a.paymentPct) / 12,
     maintenance: (capex.total * a.maintenancePctCapex) / 12,
     inventoryLoss: (retailSales * (1 - effectiveCommission) * a.retailShrinkPct + marketplaceSales * a.marketplaceLossPct) / 12,

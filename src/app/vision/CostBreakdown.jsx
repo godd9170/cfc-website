@@ -27,8 +27,9 @@ export default function CostBreakdown() {
   const rows = [
     {
       label: 'Labour', value: costs.labour,
+      note: 'Core operations is the fixed weekly work of running the terminal, whatever the volume. Everything else here scales with what the terminal does: packing with orders, module hours with what is built. Drivers are contractors, under Delivery.',
       parts: [
-        [`Core operations, ${fmtNum(p.coreHours)} hr/wk`, p.coreStaff],
+        [`Core operations, ${fmtNum(p.coreHours)} hr/wk: producer scheduling, online store and inventory, customer questions, bookkeeping`, p.coreStaff],
         ...staffedModules.map(m => [
           `${m.name}, ${fmtNum(a[`staff_${m.id}`] * state.modules[m.id])} hr/wk`,
           a[`staff_${m.id}`] * state.modules[m.id] * a.wageHourly * (52 / 12),
@@ -54,16 +55,21 @@ export default function CostBreakdown() {
       note: `Site base + modules${biggestEnergy.length ? ` (largest: ${biggestEnergy.join(', ')})` : ''}`,
       params: [['siteBaseEnergyMonthly', 'Site base']],
     },
-    { label: 'Water', value: costs.water, note: 'Site base plus washrooms, kitchen and growing', params: [['siteBaseWaterMonthly', 'Site base']] },
+    { label: 'Water & sewer', value: costs.water, note: 'One bill for the whole site', params: [['waterMonthly', 'Per month']] },
     {
       label: 'Insurance', value: costs.insurance,
       note: 'Liability, plus equipment and contents as a share of capital a year',
       params: [['insuranceBaseMonthly', 'Liability'], ['insurancePctCapex', 'Equipment & contents']],
     },
     {
-      label: 'Delivery (net of fees)', value: costs.delivery,
-      note: `${fmtNum(p.deliveriesMonthly)} household deliveries × (cost − fee), plus ${fmtNum(p.wholesaleOrdersMonthly)} wholesale drops at cost`,
-      params: [['deliveryShare', 'Orders delivered'], ['deliveryCost', 'Cost each'], ['deliveryFee', 'Fee charged']],
+      label: 'Delivery (contract drivers, net of fees)', value: costs.delivery,
+      note: `${fmtNum(p.stopsMonthly)} stops a month (${fmtNum(p.deliveriesMonthly)} household, ${fmtNum(p.wholesaleOrdersMonthly)} wholesale) · about ${fmtCad(p.stopsMonthly ? (p.driverTime + p.mileage) / p.stopsMonthly : 0)} a stop`,
+      parts: [
+        [`Driver time: ${fmtNum(p.driverHours)} hours on route × ${fmtCad(a.driverHourly)}`, p.driverTime],
+        [`Mileage: ${fmtNum(p.km)} km × $${a.driverKmRate.toFixed(2)}`, p.mileage],
+        [`Delivery fees charged to households`, -p.feesRecovered],
+      ],
+      params: [['driverHourly', 'Per hour'], ['driverKmRate', 'Per km'], ['stopsPerHour', 'Stops/hr'], ['kmPerStop', 'Km/stop'], ['deliveryShare', 'Orders delivered'], ['deliveryFee', 'Fee charged']],
     },
     {
       label: 'Software and payment processing', value: costs.software,
